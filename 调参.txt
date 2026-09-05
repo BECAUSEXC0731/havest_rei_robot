@@ -1,0 +1,101 @@
+═══════════════════════════════════════════════
+相机调参工具使用（camera_tuner）
+═══════════════════════════════════════════════
+
+【很重要】这个工具要独占相机，运行前必须先停掉相机节点：
+pkill -f component_container; pkill -f "ros2 launch"
+
+为了少打字，先记一个缩写（只在当前终端有效）：
+TUNER=/home/ubuntu/ros2fox/install/orbbec_camera/lib/orbbec_camera/camera_tuner_node
+
+═══════════════════════════════════════════════
+① 看相机支持什么分辨率、当前参数是多少
+═══════════════════════════════════════════════
+$TUNER --list
+
+会打印：
+  设备型号/PID
+  彩色(COLOR)/深度(DEPTH)/红外(IR) 各支持哪些分辨率
+  当前 soft_filter / max_diff / speckle_size / 曝光 等参数值
+
+═══════════════════════════════════════════════
+② 调一个参数 + 拍一张对比图
+═══════════════════════════════════════════════
+例：把软滤波关掉，拍一帧保存到 /tmp/tune_a
+$TUNER --set soft_filter=off --capture /home/ubuntu/ros2fox
+
+拍完会在 /tmp/tune_a 文件夹里生成：
+  depth_colored.png   伪彩色深度图 ← 主要看这个（蓝近红远，黑=没深度）
+  depth_gray.png      8bit 灰度深度图（更简单直观，白近黑远）
+  depth_raw.pgm       原始深度数据（一般不用看）
+  ir.png              红外图
+  color.png           彩色图
+
+⚠️ 注意：--capture 后面写的是“存图的文件夹”，建议用 /tmp/tune_xxx
+   这种新文件夹。别直接写 /home/ubuntu/ros2fox，会把图片堆到项目根目录。
+
+═══════════════════════════════════════════════
+③ 换个参数再拍一张，用来对比
+═══════════════════════════════════════════════
+例：软滤波开着但斑点阈值放宽，拍到 /tmp/tune_b
+$TUNER --set soft_filter=on --set speckle_size=100 --set max_diff=50 --capture /home/ubuntu/ros2fox
+
+然后去对比 /tmp/tune_a 和 /tmp/tune_b 的 depth_colored.png，
+看哪个远处葡萄更清楚。
+
+═══════════════════════════════════════════════
+④ 能调什么参数（--set 后面）
+═══════════════════════════════════════════════
+【深度相关】（影响深度图，重点看这个）
+  soft_filter=on/off      软滤波开关
+                          ← 远处葡萄看不到就试 off（实测关掉有效像素 82.7%→85.1%）
+  speckle_size=数字       斑点阈值，范围 1~1000，当前默认 480
+                          ← 调小=保留更多远处稀疏点（推荐先试 100）
+  max_diff=数字           深度差阈值，范围 1~10000，当前默认 16
+                          ← 调大=保留更多边缘/过渡深度（可试 50~100）
+  depth_exposure=数字     深度曝光，范围 0~10000，当前 1049
+                          ← 距离太暗/太亮可以调
+
+【红外相关】（影响 IR 图，进而影响深度成像质量）
+  ir_exposure=数字        IR曝光，范围 0~10000，当前 1049
+  ir_gain=数字            IR增益，范围 0~9999，当前 8000
+                          ← 环境光暗就适当调大曝光/增益，深度会更稳
+
+【这台相机不支持，设了没用】ldp / laser_energy / laser_on /
+  ir_auto_exposure / ir_brightness / depth_auto_exposure
+
+【怎么确认当前值和范围】先跑一次：
+  $TUNER --list
+  会打印当前值 + 范围（如 speckle_size: 480 (范围 1~1000)）
+
+═══════════════════════════════════════════════
+【调参小窍门】
+  你想要的"远处葡萄有深度" → 优先试：
+    $TUNER --set soft_filter=off --capture /tmp/test_off
+    $TUNER --set soft_filter=on --set speckle_size=100 --capture /tmp/test_100
+  两个图对比，哪个葡萄清楚用哪个。
+
+═══════════════════════════════════════════════
+【葡萄没深度？先诊断是"测不到"还是"被过滤"】
+═══════════════════════════════════════════════
+代码已通读确认：这台 Astra Pro 真正生效的过滤只有设备软滤波
+（soft_filter，已默认关）。其他滤波(噪声移除/空间滤波等)只在
+Gemini335 系列执行，你这台不生效。所以葡萄没深度多半是
+【设备测不到】，不是软件过滤。用下面脚本确认：
+
+步骤1：停相机
+  pkill -f component_container; pkill -f "ros2 launch"
+
+步骤2：对着葡萄拍一张（软滤波已关）
+  $TUNER --set soft_filter=off --capture /tmp/grape
+
+步骤3：分析
+  python3 /home/ubuntu/ros2fox/scripts/check_depth.py /tmp/grape
+
+看输出：
+  - "有效深度 xx%"：葡萄占画面的比例
+  - 中心区域"亮(反光)物体但深度全为0" → 设备测不到葡萄，不是过滤
+  - IR 中心亮度：亮=反射好，黑=反射差
+  - 若中心区域确实没有深度 → 换白色物体再拍对照，确认相机没坏
+
+═══════════════════════════════════════════════

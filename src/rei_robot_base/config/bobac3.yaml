@@ -1,0 +1,20 @@
+/**:
+  ros__parameters:
+    robot: "bobac3"
+    port: "/dev/ttyS4"
+    baudrate: 115200
+    kinematics_mode: 4
+    wheel_radius: 0.0505
+    wheel_separation_x: 0.152
+    wheel_separation_y: 0.0
+    motors_index: [0, 2, 1]
+    motors_signs: [-1.0, -1.0, -1.0]
+    odom_frame: "odom"
+    base_frame: "base_footprint"
+    range_1_frame_id: "range_right_link"
+    range_2_frame_id: "range_left_link"
+    max_vel_x: 0.8
+    max_vel_y: 0.8
+    max_vel_th: 1.5
+    publish_odom: true
+    publish_odom_tf: true

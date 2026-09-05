@@ -1,0 +1,41 @@
+<!--
+  自定义导航行为树（基于 nav2 默认 navigate_to_pose_w_replanning_and_recovery.xml）
+
+  修改点：给所有 action / service 节点显式加了 server_timeout="2000"
+  ⚠️注意单位：Nav2 的 server_timeout 是【毫秒】！默认值仅 20ms，
+   在 Jetson/负载高的机器上 action server 来不及在 20ms 内应答 goal，
+   导致 bt_navigator 报 "Timed out while waiting for action server to
+   acknowledge goal request for xxx" 并快速失败。设为 2000 = 2 秒。
+
+  本树每 1Hz 周期性重规划全局路径，并带规划/控制相关的恢复动作。
+-->
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <RecoveryNode number_of_retries="6" name="NavigateRecovery">
+      <PipelineSequence name="NavigateWithReplanning">
+        <RateController hz="1.0">
+          <RecoveryNode number_of_retries="1" name="ComputePathToPose">
+            <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased" server_timeout="2000"/>
+            <ClearEntireCostmap name="ClearGlobalCostmap-Context" service_name="global_costmap/clear_entirely_global_costmap" server_timeout="2000"/>
+          </RecoveryNode>
+        </RateController>
+        <RecoveryNode number_of_retries="1" name="FollowPath">
+          <FollowPath path="{path}" controller_id="FollowPath" server_timeout="2000"/>
+          <ClearEntireCostmap name="ClearLocalCostmap-Context" service_name="local_costmap/clear_entirely_local_costmap" server_timeout="2000"/>
+        </RecoveryNode>
+      </PipelineSequence>
+      <ReactiveFallback name="RecoveryFallback">
+        <GoalUpdated/>
+        <RoundRobin name="RecoveryActions">
+          <Sequence name="ClearingActions">
+            <ClearEntireCostmap name="ClearLocalCostmap-Subtree" service_name="local_costmap/clear_entirely_local_costmap" server_timeout="2000"/>
+            <ClearEntireCostmap name="ClearGlobalCostmap-Subtree" service_name="global_costmap/clear_entirely_global_costmap" server_timeout="2000"/>
+          </Sequence>
+          <Spin spin_dist="1.57" time_allowance="10" server_timeout="2000"/>
+          <Wait wait_duration="5" server_timeout="2000"/>
+          <BackUp backup_dist="0.30" backup_speed="0.05" time_allowance="10" server_timeout="2000"/>
+        </RoundRobin>
+      </ReactiveFallback>
+    </RecoveryNode>
+  </BehaviorTree>
+</root>

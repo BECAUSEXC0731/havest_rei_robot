@@ -1,0 +1,47 @@
+<robot name="fox_three_base" xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include filename="$(find fox_description_ros2)/xacro/common.xacro" />
+  <xacro:macro name="fox_three" params="sim">
+    <link name="base_link">
+      <xacro:if value="${sim}">
+        <inertial>
+          <origin xyz="0.0030739678042456 2.05969227975948E-05 0.0151501163032717"
+            rpy="0 0 0" />
+          <mass value="1.29092488605548" />
+          <inertia
+            ixx="0.00461999949457608"
+            ixy="-9.31335253102417E-08"
+            ixz="1.04763080475778E-07"
+            iyy="0.00512041132692615"
+            iyz="-1.3912234233549E-08"
+            izz="0.00957023123850327" />
+        </inertial>
+        <collision>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://fox_description_ros2/meshes/three_base_link.STL" />
+          </geometry>
+        </collision>
+      </xacro:if>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://fox_description_ros2/meshes/three_base_link.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.3 0.3 0.3 1" />
+        </material>
+      </visual>
+    </link>
+    <xacro:install_wheel parent="base_link" wheel="rf" xyz="0.12192 -0.21118 0"
+      rpy="0.0 0.0 0.523598775598318" sim="${sim}" />
+    <xacro:install_wheel parent="base_link" wheel="lf" xyz="0.12192 0.21118 0"
+      rpy="0.0 0.0 2.61799387799147" sim="${sim}" />
+    <xacro:install_wheel parent="base_link" wheel="rear" xyz="-0.243842990693909 0 0.0"
+      rpy="0.0 0.0 -1.5707963267949" sim="${sim}" />
+    <xacro:install_pnc xyz="-0.042791813 0 0.03498629" rpy="0.0 0.0 0.0" sim="${sim}" />
+    <xacro:install_lidar xyz="0.137208186971291 0 0.0802362908359103" rpy="0.0 0.0 1.5707963267949"
+      sim="${sim}" />
+    <xacro:install_bottom_camera xyz="0.174208186971291 0 0.00123870379658559" rpy="0.0 0.0 0.0"
+      sim="${sim}" />
+  </xacro:macro>
+</robot>

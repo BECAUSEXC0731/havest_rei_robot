@@ -1,0 +1,4 @@
+1、vscode中的终端长时间没有反应
+
+解决：清除卡死的终端     
+pkill -f 'type=ptyHost'

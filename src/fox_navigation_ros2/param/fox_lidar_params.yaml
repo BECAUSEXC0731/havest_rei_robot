@@ -1,0 +1,29 @@
+/**:
+  ros__parameters:
+    port: /dev/ydlidar
+    frame_id: front_lidar_link
+    ignore_array: "60, 120"
+    baudrate: 115200
+    lidar_type: 1
+    device_type: 0
+    sample_rate: 3
+    abnormal_check_count: 4
+    fixed_resolution: true
+    reversion: false
+    # 与建图(cartographer.launch.py)完全一致：front_lidar_link + inverted=true
+    inverted: true
+    auto_reconnect: true
+    isSingleChannel: true
+    intensity: true
+    intensity_bit: 10
+    support_motor_dtr: true
+    angle_min: -180.0
+    angle_max: 180.0
+    # 0.1→0.3：滤掉车身/安装座/地面反射的近距假点，避免 local costmap 把它们标记成
+    # 虚假障碍(也避免残留)。与 AMCL laser_min_range=0.3 一致，不影响定位。
+    # 建图 fox_slam 仍用 0.1，已建地图不受影响。
+    range_min: 0.3
+    range_max: 6.0
+    frequency: 10.0
+    invalid_range_is_inf: false
+    debug: false

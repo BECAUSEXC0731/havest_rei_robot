@@ -1,0 +1,34 @@
+# ===== colcon / ROS2 构建产物 =====
+build/
+install/
+log/
+Log/
+
+# ===== Python 缓存 =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.pytest_cache/
+
+# ===== C/C++ 编译中间文件 =====
+*.o
+*.a
+*.so
+*.mod
+*.d
+
+# ===== IDE / 编辑器 =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===== 系统文件 =====
+.DS_Store
+Thumbs.db
+
+# ===== 会话 / 临时文件 =====
+*.tmp

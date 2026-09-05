@@ -1,0 +1,104 @@
+# FOX 葡萄采摘综合配置
+# ────────────────────────────────────
+
+# YOLO 模型路径（.pt 或 .onnx）
+yolo_model_path: "/home/ubuntu/ros2fox/models/grape.pt"
+# 检测置信度阈值
+yolo_confidence: 0.5
+# 检测的类别名称（YOLO 类别名）
+target_class: "grape"
+
+# 相机话题
+camera_rgb_topic: "/camera/color/image_raw"
+camera_depth_topic: "/camera/depth/image_raw"
+camera_info_topic: "/camera/color/camera_info"
+
+# 手眼标定结果路径
+hand_eye_calib_path: "/home/ubuntu/ros2fox/calib_result/hand_eye_result.json"
+
+# 手动深度对齐(彩色↔IR 外参)：由 calibrate_color_ir.py 生成
+# 若存在则抓取时自动用 D2C 像素映射取深度，否则用未对齐深度
+# 注意：camera_depth_topic 必须是 /camera/depth/image_raw（未对齐的原始深度）
+d2c_extrinsic_path: "/home/ubuntu/ros2fox/calib_result/color_ir_extrinsic.json"
+ir_camera_info_path: "/home/ubuntu/ros2fox/calib_data/ir/ir_camera_info.yaml"
+
+# 机械臂参数
+arm:
+  # 工作空间范围（mm，相对机械臂基座坐标系 "robot"）
+  # 2026-09-01: 稍微放宽（x_max 320→335, y ±180→±190, z_max 200→220），
+  # 缓解葡萄坐标在边界附近抖动导致的"一时可达一时不可达"
+  workspace_x_min: 30
+  workspace_x_max: 335
+  workspace_y_min: -190
+  workspace_y_max: 190
+  workspace_z_min: 20
+  workspace_z_max: 220
+  # 安全抓取中心（机械臂抓取葡萄的理想位置）
+  preferred_x: 200
+  preferred_y: 0
+  preferred_z: 130
+  # 抓取前上升安全高度（mm）
+  lift_height: 0
+  # 夹爪 TCP 工具偏移（mm）：定义在【机械臂局部坐标系】，脚本按朝向自动旋转：
+  #   tool_offset_x: 沿机械臂指向目标的径向方向
+  #   tool_offset_y: 侧向（垂直径向）
+  #   tool_offset_z: 垂直方向（不随朝向变化）
+  # 所以葡萄在左/右/前不同位姿都能正确补偿（避免“往前调好往后又偏”）。
+  # 测量：把葡萄放机械臂正前方(y≈0)，手动让夹爪夹住，读参考点 R 和视觉坐标 P，
+  #      tool_offset = R - P（此时 θ≈0，局部系=机器人系）。
+  tool_offset_x: -24
+  tool_offset_y: -30
+  tool_offset_z: 0
+  # 预抓取安全高度（参考点上方的额外抬升，mm）
+  grasp_pre_offset: 50
+  # 夹爪夹紧后的等待时间（秒）
+  grip_delay: 1.0
+  # 夹取完成后回到的安全点（机械臂参考点，mm）
+  home_x: 0
+  home_y: -180
+  home_z: 60
+  # 机械臂基座相对 base_footprint 的偏移
+  # （机械臂在底盘中心正上方，假设底座高度为 38mm，与 base_link 平齐）
+  base_offset_z: 0.038
+
+# 底盘移动参数
+chassis:
+  max_linear_vel: 0.3       # 微调最大线速度 (m/s)
+  max_angular_vel: 0.5      # 微调最大角速度 (rad/s)
+  adjust_tolerance: 0.02    # 到达微调目标位置的容忍度 (m)
+  adjust_timeout: 15.0      # 微调超时 (秒)
+
+# 导航参数
+navigation:
+  # 是否使用 Nav2 action 导航（设为 false 则直接发 cmd_vel）
+  use_nav2: true
+  nav_action_name: "/navigate_to_pose"
+  # 导航超时（秒）
+  nav_timeout: 120.0
+
+# 航点列表（导航目标点，map 坐标系）
+# 每个航点: 到达后执行葡萄检测 + 采摘
+
+
+waypoints:
+  - position: { x: -0.892, y: 0.280 }
+    orientation: { z: 0.012, w: 1.000 }
+    description: "第一排葡萄架起点"
+  
+  - position: { x: -2.913, y: 0.349 }
+    orientation: { z: -0.060, w: 0.998 }
+    description: "第一排葡萄架终点" # 请根据实际情况修改描述
+
+
+
+
+
+# 车上篮子位置（机械臂坐标系 mm）—— 每抓到一颗葡萄后，机械臂移动到此处松开
+# 篮子放在底盘上（随车走），无需导航；位置相对机械臂基座，请按实际摆放调整
+car_basket:
+  position: { x: 0.0, y: -180.0, z: 30.0 }
+  # 移动到篮子位置上方/下方的抬升高度（mm）
+  lift_height: 30.0
+
+# 采摘完成后是否返回地图原点
+return_to_origin: true

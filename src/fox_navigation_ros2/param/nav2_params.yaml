@@ -1,0 +1,309 @@
+planner_server:
+  ros__parameters:
+    plugins: ["GridBased"]
+    use_sim_time: false
+    GridBased:
+      plugin: "nav2_navfn_planner/NavfnPlanner"
+      tolerance: 0.0
+      # false→true：用 A* 而非 Dijkstra，路径更短更直、减少贴墙蛇形钻缝
+      use_astar: true
+      # 全局路径也不走未知区域（与 costmap track_unknown_space:true 一致），
+      # 防止规划出穿墙/穿未知区的路径。⚠️目标点必须在已建图区域内，否则规划失败。
+      allow_unknown: false
+      visualize_potential: false
+
+controller_server:
+  ros__parameters:
+    use_sim_time: false
+    controller_frequency: 10.0
+    min_x_velocity_threshold: 0.001
+    min_y_velocity_threshold: 0.001
+    min_theta_velocity_threshold: 0.001
+    plugins: ["FollowPath"]
+    FollowPath:
+      # Humble 版 nav2 无 DWAPlannerController 插件，DWA 在 DWB 框架里叫 DWBLocalPlanner
+      plugin: "dwb_core::DWBLocalPlanner"
+      # True→False(2026-09-05 丝滑)：逐条轨迹调试细节很吃 CPU，Jetson 上易掉帧→跟踪抖
+      debug_trajectory_details: False
+      # ⚠️关键：max_speed_xy 默认是 0.0！不设置会导致 isValidSpeed 把所有
+      # vx≠0 的前进轨迹判非法过滤，只剩 vx=0 旋转轨迹（只转不走）。
+      # 2026-09-05 丝滑：max_vel_x/y=0.2 → hypot=0.283；max_speed_xy/theta 留裕量
+      # (0.35/0.6)，否则上界速度档被 isValidVelocity 判非法削顶→速度档跳变。
+      min_speed_xy: 0.0
+      max_speed_xy: 0.35
+      min_speed_theta: 0.0
+      max_speed_theta: 0.6
+      # 2026-09-05：取消"尽量后退"策略 min_vel_x -0.1→0.0(禁倒车)，前进更连贯
+      min_vel_x: 0.0
+      max_vel_x: 0.2
+      min_vel_y: -0.1
+      max_vel_y: 0.2
+      max_vel_theta: 0.5
+      # -0.4→-0.5：与 +0.5 对称，修角不单边偏向
+      min_vel_theta: -0.5
+      min_in_place_vel_theta: 0.0
+      # acc 0.1→0.25/0.2(2026-09-05 丝滑)：起步/出弯速度建立更快，跟得上路径，
+      # 减少"落后→猛修"的蛇形；decel -0.25 匹配加速、平滑停下不过冲。
+      # 若打滑/起步冲，回退 acc_lim_x=0.15。
+      acc_lim_x: 0.25
+      acc_lim_y: 0.2
+      acc_lim_theta: 0.5
+      decel_lim_x: -0.25
+      decel_lim_y: -0.2
+      decel_lim_theta: -0.5
+      xy_goal_tolerance: 0.05
+      # 0.17→0.12(2026-09-05 丝滑)：到位朝向更准，减少"到位后又转一下/重新对位"
+      yaw_goal_tolerance: 0.12
+      # false→true：进入 xy 容差即锁存到位，避免目标点附近反复进出→到位抖动
+      latch_xy_goal_tolerance: true
+      # 1.5→2.0：前瞻更长，弯道预判更顺(vth 已降档、debug 已关以补偿 CPU)
+      sim_time: 2.0
+      vx_samples: 10
+      vy_samples: 4
+      # 20→12(2026-09-05)：降负载防 controller 掉帧(掉帧→周期不均→更抖)
+      vth_samples: 12
+      path_distance_bias: 0.8
+      goal_distance_bias: 0.6
+      # occdist_scale 是 DWA 的旧参数，DWB 里无效(被忽略)，真正避障靠 BaseObstacleCritic
+      forward_point_distance: 0.3
+      stop_time_buffer: 0.2
+      scaling_speed: 0.25
+      max_scaling_factor: 0.2
+      oscillation_reset_dist: 0.05
+      publish_traj_pc: false
+      publish_cost_grid_pc: false
+      # DWB 控制器必须配置 critics(评分器)，否则报 "No critics defined for FollowPath"
+      # 2026-09-05：移除 PreferForward("尽量后退"策略取消)。轨迹只由 路径/目标/避障 决定，
+      # 自然连贯朝目标前进，无"前进-后退"中断 → 更丝滑。
+      critics: ["RotateToGoal", "Oscillation", "BaseObstacle", "GoalAlign", "PathAlign", "PathDist", "GoalDist"]
+      BaseObstacle:
+        plugin: "dwb_critics::BaseObstacleCritic"
+        # 0.02→0.3：提高"靠近障碍物"的惩罚权重，机器人会更害怕障碍、保持距离
+        scale: 0.1
+      GoalAlign:
+        plugin: "dwb_critics::GoalAlignCritic"
+        scale: 24.0
+      GoalDist:
+        plugin: "dwb_critics::GoalDistCritic"
+        scale: 24.0
+      PathAlign:
+        plugin: "dwb_critics::PathAlignCritic"
+        scale: 32.0
+      PathDist:
+        plugin: "dwb_critics::PathDistCritic"
+        scale: 32.0
+      RotateToGoal:
+        plugin: "dwb_critics::RotateToGoalCritic"
+        scale: 32.0
+      Oscillation:
+        plugin: "dwb_critics::OscillationCritic"
+        scale: 1.0
+
+global_costmap:
+  global_costmap:
+    ros__parameters:
+      use_sim_time: false
+      global_frame: map
+      robot_base_frame: base_footprint
+      # ⚠️三轮全向底盘真实外轮廓(约0.44x0.47m)：必须显式设置，否则默认0.1m圆，
+      # 膨胀严重不足导致路径"横穿/贴墙"。此值与轮距(前±0.211, 后-0.244)贴合。
+      footprint: "[[0.20, 0.21], [-0.24, 0.21], [-0.24, -0.21], [0.20, -0.21]]"
+      update_frequency: 1.0
+      publish_frequency: 0.5
+      transform_tolerance: 0.5
+      map_type: voxel
+      # ⚠️前方无雷达数据的区域=unknown；track_unknown_space:true 后 DWB 会把
+      # 进入 unknown 的轨迹判非法(见 BaseObstacleCritic::isValidCost) → 从根源防撞墙
+      track_unknown_space: true
+      always_send_full_costmap: true
+      # 全局代价地图只用静态地图(不挂 obstacle_layer) → 动态障碍不标记进全局，
+      # 全局路径按地图稳定规划、不被动态障碍污染/残留。动态避障在 local_costmap 完成。
+      # keepout_filter：禁行区(掩码黑色区)标记为致命障碍，全局路径绕开
+      plugins: ["static_layer", "keepout_filter", "inflation_layer"]
+      static_layer:
+        plugin: "nav2_costmap_2d::StaticLayer"
+        map_subscribe_transient_local: true
+        enabled: true
+      keepout_filter:
+        plugin: "nav2_costmap_2d::KeepoutFilter"
+        enabled: true
+        # 订阅 costmap_filter_info_server 发布的 CostmapFilterInfo（里面带
+        # filter_mask_topic 告诉本层去订阅哪个 keepout 掩码话题）
+        filter_info_topic: "/keepout_filter_info"
+        transform_tolerance: 0.5
+      inflation_layer:
+        plugin: "nav2_costmap_2d::InflationLayer"
+        enabled: true
+        # ⚠️关键：全局路径贴不贴墙由这组参数配合决定
+        # 3.0→2.0：cost_scaling_factor 越小 → 代价衰减越平缓 → 斥力场铺得越宽越圆润，
+        #   路径沿"走廊谷底"走得更居中，而不是贴着墙边切角。别低于 1.5（否则窄通道代价过高）。
+        cost_scaling_factor: 2.0
+        # inflation_radius 保持 0.3(≈车身外接半径0.32m)：不强制大幅绕路，仍能过窄通道；
+        #   不贴墙主要靠上面的 cost_scaling_factor=2.0 平缓衰减让路径在可行域内居中。
+        #   ⚠️若实测仍擦墙：把 inflation_radius 提到 0.4~0.5(0.5=车身+0.18m 安全余量)；
+        #     若窄通道/门口规划失败(全局无可行路径)，再回调 0.3 或更低。
+        inflation_radius: 0.2
+
+local_costmap:
+  local_costmap:
+    ros__parameters:
+      use_sim_time: false
+      global_frame: odom
+      robot_base_frame: base_footprint
+      # 与 global 一致的 footprint（见上），膨胀按真实车身计算
+      footprint: "[[0.20, 0.21], [-0.24, 0.21], [-0.24, -0.21], [0.20, -0.21]]"
+      update_frequency: 5.0
+      publish_frequency: 2.0
+      always_send_full_costmap: true
+      transform_tolerance: 0.5
+      rolling_window: true
+      # 识别动态障碍：local 恢复 obstacle_layer(激光 marking+clearing) 做实时避障；
+      # 保留 static_layer 提供地图墙。动态障碍只参与局部避障，不标记进全局代价地图。
+      track_unknown_space: true
+      width: 2
+      height: 2
+      resolution: 0.05
+      plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
+      static_layer:
+        plugin: "nav2_costmap_2d::StaticLayer"
+        map_subscribe_transient_local: true
+        enabled: true
+      obstacle_layer:
+        plugin: "nav2_costmap_2d::VoxelLayer"
+        enabled: true
+        max_obstacle_height: 0.8
+        obstacle_range: 3.0
+        raytrace_range: 3.0
+        origin_z: 0.0
+        z_resolution: 0.1
+        z_voxels: 16
+        unknown_threshold: 0
+        mark_threshold: 0
+        publish_voxel_map: false
+        observation_sources: scan
+        scan:
+          topic: /scan
+          data_type: LaserScan
+          marking: true
+          clearing: true
+          min_obstacle_height: 0.0
+          max_obstacle_height: 0.8
+          obstacle_range: 4.0
+          raytrace_range: 4.0
+          inf_is_valid: false
+      inflation_layer:
+        plugin: "nav2_costmap_2d::InflationLayer"
+        enabled: true
+        # 3.0→2.5：与 global 同步调平，实际跟踪时也不贴墙
+        #   （比 global 保守：局部还要负责动态避障和窄通道通行）
+        cost_scaling_factor: 2.5
+        # inflation_radius 保持 0.15：局部膨胀不大幅加大，避免"只转不走"；
+        #   若实测跟踪仍贴墙，可提到 0.2~0.25（不宜过大否则又只转不走）
+        inflation_radius: 0.15
+
+# ⚠️ amcl 段当前【不再使用】: 定位已改用 lidar_loc(src/lidar_loc.cpp,
+#   jie_ware 激光“势场爬山匹配”算法移植版), 由 fox_navigation.launch.py 启动
+#   lidar_loc 节点替代 nav2_amcl。本段整块保留仅为回退 AMCL 时复用
+#   (把 launch 里的 lidar_loc 换回 amcl 节点并加回 lifecycle 即可)。
+amcl:
+  ros__parameters:
+    use_sim_time: false
+    # ⚠️场地打滑→里程计不可靠→定位"更信激光、少信里程计"，两层同时调：
+    # ① 运动模型噪声(alpha1-5)：0.2→0.4。预测步把粒子云散得更开，
+    #    激光匹配(更新步)掌握主导权、更快把 map→odom 修回真实位姿；
+    #    粒子云足够发散才不会被"错误里程计"锁死在错误位置。
+    #    若仍贴合漂移可加到 0.5~0.6；若出现位姿抖动/跳变则回退 0.3。
+    alpha1: 0.4
+    alpha2: 0.4
+    alpha3: 0.4
+    alpha4: 0.4
+    alpha5: 0.4
+    base_frame_id: base_footprint
+    beam_skip_distance: 0.5
+    beam_skip_error_threshold: 0.9
+    beam_skip_threshold: 0.3
+    do_beamskip: false
+    global_frame_id: map
+    lambda_short: 0.1
+    laser_likelihood_max_dist: 2.0
+    # 与雷达 range_max/range_min 一致，避免 AMCL 用超出传感器范围的假设
+    laser_max_range: 6.0
+    # 0.1→0.3：滤掉 0.3m 内车身/安装座/地面反射的近距离假点，避免它们干扰
+    # 激光与地图的匹配导致贴合漂移（近距约束由 0.3m 外真实环境点提供）
+    laser_min_range: 0.3
+    laser_model_type: likelihood_field
+    max_beams: 60
+    max_particles: 1000
+    min_particles: 300
+    odom_frame_id: odom
+    pf_err: 0.05
+    pf_z: 0.99
+    # 0.0→0.1/0.0001：开启"增强MCL"随机粒子注入。里程计打滑把滤波
+    # 锁到错误位置时 w_fast 权重崩坏会注入随机粒子，让雷达能重新定位。
+    recovery_alpha_fast: 0.1
+    recovery_alpha_slow: 0.0001
+    resample_interval: 3
+    # Humble 版 nav2_amcl 无 OmniDiffTurnHeuristic，三轮全向用 OmniMotionModel
+    robot_model_type: nav2_amcl::OmniMotionModel
+    save_pose_rate: 0.5
+    # 0.2→0.15：激光命中似然更尖锐 → 对地图边缘匹配更"较真"，贴合更准
+    sigma_hit: 0.15
+    tf_broadcast: true
+    transform_tolerance: 0.5
+    # 0.2→0.1：更小的位移/转角即触发重采样，激光修正响应更快，
+    # 减少里程计漂移期间的位姿滞后（CPU 占用略增，可接受）
+    update_min_a: 0.1
+    update_min_d: 0.1
+    # ② 传感器模型权重：z_hit/z_rand 0.5/0.5→0.85/0.05，把概率几乎全压在
+    #    "真实激光命中"上，大幅压制随机噪声 → 更新步完全由雷达主导
+    z_hit: 0.85
+    z_max: 0.05
+    z_rand: 0.05
+    z_short: 0.05
+    set_initial_pose: true
+    initial_pose_x: 0.0
+    initial_pose_y: 0.0
+    initial_pose_z: 0.0
+    initial_pose_a: 0.0
+
+bt_navigator:
+  ros__parameters:
+    use_sim_time: false
+    # Nav2 Humble 默认 server_timeout 仅 20ms，负载高时 action 应答来不及会秒超时
+    # 单位是毫秒，2000 = 2 秒（与自定义行为树里的显式 server_timeout 一致）
+    default_server_timeout: 2000
+    global_frame: map
+    robot_base_frame: base_footprint
+    default_nav_to_pose_bt_xml: "/home/ubuntu/ros2fox/src/fox_navigation_ros2/bt/navigate_to_pose_w_replanning_and_recovery.xml"
+    plugin_packages: ["nav2_planner", "nav2_controller", "nav2_behaviors"]
+    goal_blackboard_id: "goal"
+
+map_server:
+  ros__parameters:
+    use_sim_time: false
+    yaml_filename: "/home/ubuntu/ros2fox/maps/test_map.yaml"
+
+behavior_server:
+  ros__parameters:
+    use_sim_time: false
+    costmap_topic: local_costmap/costmap_raw
+    footprint_topic: local_costmap/published_footprint
+    cycle_frequency: 10.0
+    behavior_plugins: ["spin", "backup", "drive_on_heading", "assisted_teleop", "wait"]
+    spin:
+      plugin: "nav2_behaviors/Spin"
+    backup:
+      plugin: "nav2_behaviors/BackUp"
+    drive_on_heading:
+      plugin: "nav2_behaviors/DriveOnHeading"
+    wait:
+      plugin: "nav2_behaviors/Wait"
+    assisted_teleop:
+      plugin: "nav2_behaviors/AssistedTeleop"
+    global_frame: odom
+    robot_base_frame: base_footprint
+    transform_tolerance: 0.5
+    simulate_ahead_time: 2.0
+    max_rotational_vel: 1.0
+    min_rotational_vel: 0.4
+    rotational_acc_lim: 3.2

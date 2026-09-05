@@ -1,0 +1,60 @@
+启动：
+1、 source ~/ros2fox/install/local_setup.zsh          
+2、 ros2 launch ydlidar_ros2_driver ydlidar_launch.py
+
+usb插口 
++++|---|
+---|---|
+
+
+
+
+快速使用指南
+--------------------------------------------------------------------------------
+
+首次使用 — 设置 udev 规则（仅需一次）
+  运行初始化脚本
+    sudo bash src/ydlidar_ros2_driver/startup/initenv.sh
+
+  完成后重新插拔雷达，确认:
+    ls -la /dev/ydlidar
+  应显示: /dev/ydlidar -> ttyUSBx
+
+
+
+编译
+    cd /home/ubuntu/ros2fox
+    colcon build --packages-select ydlidar_ros2_driver
+    source install/setup.bash
+
+3.4 启动驱动===============================================================================
+使用绝对路径（推荐，避免环境变量冲突）
+    ros2 launch /home/ubuntu/ros2fox/install/ydlidar_ros2_driver/share/\
+      ydlidar_ros2_driver/launch/ydlidar_launch.py \
+      params_file:=/home/ubuntu/ros2fox/install/ydlidar_ros2_driver/share/\
+      ydlidar_ros2_driver/params/X2.yaml
+
+    # 方式二：使用包名（需要正确设置了 ROS 环境）
+    ros2 launch ydlidar_ros2_driver ydlidar_launch.py \
+      params_file:=/path/to/your/params.yaml
+
+
+3.5 验证驱动是否正常
+    # 查看话题列表
+    ros2 topic list | grep scan
+
+    # 查看话题信息
+    ros2 topic info /scan
+
+    # 查看一帧雷达数据
+    ros2 topic echo /scan --once
+
+    # 查看雷达频率
+    ros2 topic hz /scan
+
+3.6 可视化雷达数据
+    ros2 run rviz2 rviz2
+    在 RViz 中添加 LaserScan 显示，Topic 选择 /scan，Frame 选择 laser_frame
+
+
+
