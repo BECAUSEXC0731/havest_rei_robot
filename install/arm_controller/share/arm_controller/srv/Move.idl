@@ -1,0 +1,18 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from arm_controller/srv/Move.srv
+// generated code does not contain a copyright notice
+
+#include "arm_controller/msg/Control.idl"
+
+module arm_controller {
+  module srv {
+    struct Move_Request {
+      arm_controller::msg::Control pose;
+    };
+    struct Move_Response {
+      string message;
+
+      boolean success;
+    };
+  };
+};

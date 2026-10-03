@@ -1,0 +1,40 @@
+[2.056s] Invoking command in '/home/ubuntu/ros2fox/src/fox_grape_harvest': CMAKE_PREFIX_PATH=/home/ubuntu/ros2fox/install/arm_controller LD_LIBRARY_PATH=/home/ubuntu/ros2fox/install/arm_controller/lib:/opt/ros/humble/lib:/usr/local/cuda/lib64:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/home/ubuntu/ros2fox/build/fox_grape_harvest/prefix_override:/home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages:/home/ubuntu/ros2fox/install/arm_controller/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/fox_grape_harvest build --build-base /home/ubuntu/ros2fox/build/fox_grape_harvest/build install --record /home/ubuntu/ros2fox/build/fox_grape_harvest/install.log --single-version-externally-managed install_data
+[2.724s] running egg_info
+[2.768s] writing ../../build/fox_grape_harvest/fox_grape_harvest.egg-info/PKG-INFO
+[2.771s] writing dependency_links to ../../build/fox_grape_harvest/fox_grape_harvest.egg-info/dependency_links.txt
+[2.773s] writing entry points to ../../build/fox_grape_harvest/fox_grape_harvest.egg-info/entry_points.txt
+[2.774s] writing requirements to ../../build/fox_grape_harvest/fox_grape_harvest.egg-info/requires.txt
+[2.775s] writing top-level names to ../../build/fox_grape_harvest/fox_grape_harvest.egg-info/top_level.txt
+[2.872s] reading manifest file '../../build/fox_grape_harvest/fox_grape_harvest.egg-info/SOURCES.txt'
+[2.875s] writing manifest file '../../build/fox_grape_harvest/fox_grape_harvest.egg-info/SOURCES.txt'
+[2.875s] running build
+[2.876s] running build_py
+[2.876s] copying fox_grape_harvest/chassis_interface.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest
+[2.878s] copying fox_grape_harvest/wait_utils.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest
+[2.880s] copying fox_grape_harvest/harvest_node.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest
+[2.882s] copying fox_grape_harvest/arm_interface.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest
+[2.890s] copying fox_grape_harvest/depth_utils.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest
+[2.891s] copying fox_grape_harvest/yolo_detector.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest
+[2.891s] copying fox_grape_harvest/grape_grasp_test.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest
+[2.892s] copying fox_grape_harvest/__init__.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest
+[2.893s] running install
+[2.907s] running install_lib
+[2.958s] copying /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest/harvest_node.py -> /home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages/fox_grape_harvest
+[2.959s] copying /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest/arm_interface.py -> /home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages/fox_grape_harvest
+[2.960s] byte-compiling /home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages/fox_grape_harvest/harvest_node.py to harvest_node.cpython-310.pyc
+[2.976s] byte-compiling /home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages/fox_grape_harvest/arm_interface.py to arm_interface.cpython-310.pyc
+[2.980s] running install_data
+[2.980s] copying resource/fox_grape_harvest -> /home/ubuntu/ros2fox/install/fox_grape_harvest/share/ament_index/resource_index/packages
+[2.981s] copying package.xml -> /home/ubuntu/ros2fox/install/fox_grape_harvest/share/fox_grape_harvest
+[2.982s] copying launch/full_system.launch.py -> /home/ubuntu/ros2fox/install/fox_grape_harvest/share/fox_grape_harvest/launch
+[2.983s] copying launch/grape_harvest.launch.py -> /home/ubuntu/ros2fox/install/fox_grape_harvest/share/fox_grape_harvest/launch
+[2.983s] copying scripts/test_detection.py -> /home/ubuntu/ros2fox/install/fox_grape_harvest/share/fox_grape_harvest/scripts
+[2.983s] copying scripts/grape_grasp_test.py -> /home/ubuntu/ros2fox/install/fox_grape_harvest/share/fox_grape_harvest/scripts
+[2.984s] running install_egg_info
+[3.037s] removing '/home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages/fox_grape_harvest-0.1.0-py3.10.egg-info' (and everything under it)
+[3.043s] Copying ../../build/fox_grape_harvest/fox_grape_harvest.egg-info to /home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages/fox_grape_harvest-0.1.0-py3.10.egg-info
+[3.043s] running install_scripts
+[3.430s] Installing grape_grasp_test.py script to /home/ubuntu/ros2fox/install/fox_grape_harvest/lib/fox_grape_harvest
+[3.431s] Installing grape_harvest_node script to /home/ubuntu/ros2fox/install/fox_grape_harvest/lib/fox_grape_harvest
+[3.432s] writing list of installed files to '/home/ubuntu/ros2fox/build/fox_grape_harvest/install.log'
+[3.533s] Invoked command in '/home/ubuntu/ros2fox/src/fox_grape_harvest' returned '0': CMAKE_PREFIX_PATH=/home/ubuntu/ros2fox/install/arm_controller LD_LIBRARY_PATH=/home/ubuntu/ros2fox/install/arm_controller/lib:/opt/ros/humble/lib:/usr/local/cuda/lib64:/opt/ros/humble/lib:/usr/local/cuda/lib64 PYTHONPATH=/home/ubuntu/ros2fox/build/fox_grape_harvest/prefix_override:/home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages:/home/ubuntu/ros2fox/install/arm_controller/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/fox_grape_harvest build --build-base /home/ubuntu/ros2fox/build/fox_grape_harvest/build install --record /home/ubuntu/ros2fox/build/fox_grape_harvest/install.log --single-version-externally-managed install_data

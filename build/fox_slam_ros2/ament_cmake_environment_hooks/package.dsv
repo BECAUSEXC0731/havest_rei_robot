@@ -1,0 +1,4 @@
+source;share/fox_slam_ros2/local_setup.bash
+source;share/fox_slam_ros2/local_setup.dsv
+source;share/fox_slam_ros2/local_setup.sh
+source;share/fox_slam_ros2/local_setup.zsh

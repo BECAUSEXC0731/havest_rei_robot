@@ -1,0 +1,99 @@
+# FOX WebUI — 模块启停白名单
+# ════════════════════════════════════════════════════════════════════════
+# 安全原则（详见 docs/WebUI_技术文档.md §5.5）：
+#   1. 前端**只能传模块名**，命令永远来自本文件 → 不给远程 shell；
+#   2. 每个模块用独立进程组（start_new_session）→ 停止时整组发信号，
+#      不留孤儿进程（本项目踩过：ydlidar 残留导致 "Unknown error"）；
+#   3. 依赖用 requires 声明，未满足时拒绝启动并提示缺哪些；
+#   4. ready 是"启动成功"的判据（话题出现且频率达标），前端据此显示绿灯。
+#
+# 字段说明
+#   desc      : 前端显示名
+#   cmd       : 命令 + 参数（列表形式，不经过 shell）
+#   env       : 额外环境变量（与 Agent 的环境合并）
+#   pre       : 启动前执行的清理命令（列表，非 shell）
+#   requires  : 必须先 running 的模块名
+#   ready     : {topic: 话题, min_hz: 最低频率, static: true 表示锁存话题}
+#   detect    : 用于识别"Agent 重启后遗留的实例"（pgrep -f 的正则片段，
+#               默认取 cmd 里的 *.launch.py / *.py，不够唯一时必须显式写）
+#   cwd       : 工作目录（默认工作区根）
+#   confirm   : true 时前端启动需二次确认（会开机件动作的模块）
+# ════════════════════════════════════════════════════════════════════════
+
+workspace: /home/ubuntu/ros2fox
+
+modules:
+  # ── 底盘（三轮全向）──
+  # ⚠️ nav 模块的 launch 已经 include 了 base.launch.py，一般不用单独启动；
+  #    detect 用节点名（robot_base_node）—— 这样即便它是被 nav 拉起来的，
+  #    面板也会认出"外部实例"，不会重复启动（两个底盘节点会抢串口）。
+  base:
+    desc: "🛞 底盘驱动（nav 已自带）"
+    cmd: ["ros2", "launch", "rei_robot_base", "base.launch.py"]
+    env: {REI_ROBOT: "fox_three"}          # ⚠️ 缺了会直接报错
+    detect: "robot_base_node"
+    ready: {topic: /odom, min_hz: 1.0}
+    confirm: true                          # 底盘上电 → 可能动，谨慎
+
+  # ── 激光雷达 ──
+  # ⚠️ 同上：nav 的 launch 已经启动了 ydlidar 节点（用 fox_lidar_params.yaml，
+  #    frame_id=front_lidar_link + inverted=true）。这里保留"单独启动"的能力，
+  #    做建图(SLAM)或单测雷达时才需要。
+  lidar:
+    desc: "📡 激光雷达（nav 已自带）"
+    cmd: ["ros2", "launch", "fox_slam_ros2", "fox_lidar.launch.py"]
+    pre: ["pkill", "-f", "ydlidar_ros2_driver"]   # 端口占用 → "Unknown error"
+    detect: "ydlidar_ros2_driver_node"
+    ready: {topic: /scan, min_hz: 5.0}
+
+  # ── 导航（地图 + AMCL + Nav2）──
+  # ⚠️ 不要加 requires: [base, lidar] —— fox_navigation.launch.py 自己就
+  #    IncludeLaunchDescription(base.launch.py) 并启动了雷达节点。
+  #    再要求先手动启动底盘/雷达，反而容易出现"两份底盘/两份雷达"抢串口。
+  nav:
+    desc: "🧭 导航 Nav2（含底盘+雷达）"
+    cmd: ["ros2", "launch", "fox_navigation_ros2", "fox_navigation.launch.py",
+          "open_rviz:=false"]
+    ready: {topic: /map, static: true}
+
+  # ── 相机（Orbbec Astra Pro Plus）──
+  camera:
+    desc: "📷 深度相机"
+    # ⚠️ 必须固化正确内参文件（fx≈607）；用根 README 的旧内参会让手眼/像素→3D 全错
+    cmd: ["ros2", "launch", "orbbec_camera", "astra_pro_plus.launch.py",
+          "color_info_url:=file:///home/ubuntu/ros2fox/calib_data/color/color_camera_info.yaml",
+          "enable_noise_removal_filter:=false",
+          "enable_soft_filter:=false",
+          "enable_threshold_filter:=false",
+          "enable_decimation_filter:=false",
+          "enable_hole_filling_filter:=true"]
+    ready: {topic: /camera/color/image_raw, min_hz: 5.0}
+
+  # ── 机械臂 ──
+  arm:
+    desc: "🦾 机械臂"
+    cmd: ["ros2", "launch", "arm_controller", "arm_controller.launch.py"]
+    ready: {topic: /arm_controller/position_info, min_hz: 1.0}
+    confirm: true                          # 上电后机械臂会保持位置/可能回零
+
+  # ── 夹爪 ──
+  gripper:
+    desc: "🤏 夹爪"
+    cmd: ["ros2", "launch", "gripper_control", "gripper.launch.py"]
+    ready: {topic: /gripper/state, min_hz: 0.1}
+
+  # ── 采摘主流程（受控：启动后不自动跑，由页面点"开始"触发）──
+  harvest:
+    desc: "🍇 采摘主流程"
+    cmd: ["ros2", "launch", "fox_grape_harvest", "grape_harvest.launch.py"]
+    detect: "grape_harvest"      # launch 与 node 两种启动方式都认得出
+    requires: [nav, camera, arm, gripper]
+    ready: {topic: /grape_harvest/status}
+
+  # ── 无硬件自检（调试用，不接任何设备）──
+  selftest:
+    desc: "🧪 自检话题（无需硬件）"
+    cmd: ["ros2", "topic", "pub", "-r", "10", "/selftest",
+          "std_msgs/msg/String", "{data: 'webui ok'}"]
+    detect: "topic pub -r 10 /selftest"      # 避免误判其它 ros2 topic 命令
+    ready: {topic: /selftest, min_hz: 5.0}

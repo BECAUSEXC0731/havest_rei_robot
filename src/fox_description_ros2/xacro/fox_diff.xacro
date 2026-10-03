@@ -1,0 +1,48 @@
+<robot name="fox_diff_base" xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include filename="$(find fox_description_ros2)/xacro/common.xacro" />
+  <xacro:macro name="fox_diff" params="sim">
+    <link name="base_link">
+      <xacro:if value="${sim}">
+        <inertial>
+          <origin xyz="-0.146670402900513 4.33277553316518E-06 0.0168441404417918"
+            rpy="0 0 0" />
+          <mass value="1.32858565520133" />
+          <inertia
+            ixx="0.00374121311127178"
+            ixy="-9.28418825158413E-08"
+            ixz="-3.57092466427357E-06"
+            iyy="0.00383052332831457"
+            iyz="-1.63663136772639E-09"
+            izz="0.00737527570647152" />
+        </inertial>
+        <collision>
+          <origin xyz="0 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://fox_description_ros2/meshes/diff_base_link.STL" />
+          </geometry>
+        </collision>
+      </xacro:if>
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://fox_description/meshes/diff_base_link.STL" />
+        </geometry>
+        <material name="">
+          <color rgba="0.3 0.3 0.3 1" />
+        </material>
+      </visual>
+
+    </link>
+    <xacro:install_wheel parent="base_link" wheel="rf" xyz="0.0 -0.149 0.0"
+      rpy="0.0 0.0 0.0" sim="${sim}" />
+    <xacro:install_wheel parent="base_link" wheel="lf" xyz="0.0 0.149 0.0"
+      rpy="0.0 0.0 3.1415926" sim="${sim}" />
+    <xacro:install_wheel parent="base_link" wheel="lr" xyz="-0.2935 0.149 0.0"
+      rpy="0.0 0.0 3.1415926" sim="${sim}" />
+    <xacro:install_wheel parent="base_link" wheel="rr" xyz="-0.2935 -0.149 0.0"
+      rpy="0.0 0.0 0.0" sim="${sim}" />
+    <xacro:install_pnc xyz="-0.158508 0 0.034988" rpy="0.0 0.0 0.0" sim="${sim}" />
+    <xacro:install_lidar xyz="0.0214919600289281 0 0.0802380006354299" rpy="0.0 0.0 1.5707963267949" sim="${sim}" />
+    <xacro:install_bottom_camera xyz="0.058491960028928 0 0.0012404135961052" rpy="0.0 0.0 0.0" sim="${sim}" />
+  </xacro:macro>
+</robot>

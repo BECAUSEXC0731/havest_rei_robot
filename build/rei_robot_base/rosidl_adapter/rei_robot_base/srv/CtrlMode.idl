@@ -1,0 +1,21 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from rei_robot_base/srv/CtrlMode.srv
+// generated code does not contain a copyright notice
+
+
+module rei_robot_base {
+  module srv {
+    struct CtrlMode_Request {
+      @verbatim (language="comment", text=
+        "0: velocity, 1: motor speed")
+      int8 ctrl_mode;
+
+      @verbatim (language="comment", text=
+        "only valid when ctrl_mode is velocity")
+      boolean use_acc;
+    };
+    struct CtrlMode_Response {
+      boolean success;
+    };
+  };
+};

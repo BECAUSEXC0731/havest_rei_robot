@@ -1,0 +1,124 @@
+[0.000000] (-) TimerEvent: {}
+[0.001628] (-) JobUnselected: {'identifier': 'arm_controller'}
+[0.001754] (-) JobUnselected: {'identifier': 'fox_description_ros2'}
+[0.001966] (-) JobUnselected: {'identifier': 'fox_grape_harvest'}
+[0.002287] (-) JobUnselected: {'identifier': 'fox_navigation_ros2'}
+[0.002788] (-) JobUnselected: {'identifier': 'fox_slam_ros2'}
+[0.003130] (-) JobUnselected: {'identifier': 'gripper_control'}
+[0.003483] (-) JobUnselected: {'identifier': 'jie_ware'}
+[0.003616] (-) JobUnselected: {'identifier': 'orbbec_camera'}
+[0.003763] (-) JobUnselected: {'identifier': 'orbbec_camera_msgs'}
+[0.003938] (-) JobUnselected: {'identifier': 'orbbec_description'}
+[0.004100] (-) JobUnselected: {'identifier': 'rei_robot_base'}
+[0.004344] (-) JobUnselected: {'identifier': 'ydlidar_ros2_driver'}
+[0.004635] (fox_webui) JobQueued: {'identifier': 'fox_webui', 'dependencies': OrderedDict([('arm_controller', '/home/ubuntu/ros2fox/install/arm_controller'), ('rei_robot_base', '/home/ubuntu/ros2fox/install/rei_robot_base'), ('fox_grape_harvest', '/home/ubuntu/ros2fox/install/fox_grape_harvest')])}
+[0.004804] (fox_webui) JobStarted: {'identifier': 'fox_webui'}
+[0.099867] (-) TimerEvent: {}
+[0.200347] (-) TimerEvent: {}
+[0.300741] (-) TimerEvent: {}
+[0.401379] (-) TimerEvent: {}
+[0.501896] (-) TimerEvent: {}
+[0.602586] (-) TimerEvent: {}
+[0.703097] (-) TimerEvent: {}
+[0.803475] (-) TimerEvent: {}
+[0.903853] (-) TimerEvent: {}
+[1.004210] (-) TimerEvent: {}
+[1.104581] (-) TimerEvent: {}
+[1.204963] (-) TimerEvent: {}
+[1.305592] (-) TimerEvent: {}
+[1.405968] (-) TimerEvent: {}
+[1.506351] (-) TimerEvent: {}
+[1.606717] (-) TimerEvent: {}
+[1.707088] (-) TimerEvent: {}
+[1.807472] (-) TimerEvent: {}
+[1.907884] (-) TimerEvent: {}
+[1.980504] (fox_webui) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/fox_webui', 'build', '--build-base', '/home/ubuntu/ros2fox/build/fox_webui/build', 'install', '--record', '/home/ubuntu/ros2fox/build/fox_webui/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/ubuntu/ros2fox/src/fox_webui', 'env': {'LC_TIME': 'en_HK.UTF-8', 'SSH_CLIENT': '10.136.202.231 49622 22', 'USER': 'ubuntu', 'AI_AGENT': 'github_copilot_vscode_agent', 'CAMERA_TYPE': 'GEMINI', 'GIT_EDITOR': ':', 'XDG_SESSION_TYPE': 'tty', 'GIT_ASKPASS': '/home/ubuntu/.vscode-server/cli/servers/Stable-04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/server/extensions/git/dist/askpass.sh', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/ubuntu/ros2fox/install/rei_robot_base/lib:/home/ubuntu/ros2fox/install/arm_controller/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/home/ubuntu/ros2fox/install/fox_grape_harvest/lib:/home/ubuntu/ros2fox/install/fox_navigation_ros2/lib:/home/ubuntu/ros2fox/install/fox_slam_ros2/lib:/home/ubuntu/ros2fox/install/fox_webui/lib:/home/ubuntu/ros2fox/install/gripper_control/lib:/home/ubuntu/ros2fox/install/orbbec_camera/lib:/home/ubuntu/ros2fox/install/orbbec_camera_msgs/lib:/home/ubuntu/ros2fox/install/ydlidar_ros2_driver/lib:/home/ubuntu/ros2fox/install/arm_controller/local/lib:/home/ubuntu/ros2fox/install/orbbec_camera_msgs/local/lib:/home/ubuntu/ros2fox/install/rei_robot_base/local/lib:/home/ubuntu/ros2fox/install/fox_grape_harvest/lib:/home/ubuntu/ros2fox/install/fox_navigation_ros2/lib:/home/ubuntu/ros2fox/install/fox_slam_ros2/lib:/home/ubuntu/ros2fox/install/fox_webui/lib:/home/ubuntu/ros2fox/install/gripper_control/lib:/home/ubuntu/ros2fox/install/orbbec_camera/lib:/home/ubuntu/ros2fox/install/orbbec_camera_msgs/lib:/home/ubuntu/ros2fox/install/ydlidar_ros2_driver/lib:/home/ubuntu/ros2fox/install/arm_controller/local/lib:/home/ubuntu/ros2fox/install/orbbec_camera_msgs/local/lib:/home/ubuntu/ros2fox/install/rei_robot_base/local/lib:/opt/ros/humble/lib:/usr/local/cuda/lib64:/opt/ros/humble/lib:/usr/local/cuda/lib64', 'MACHINE_TYPE': 'JETARM_ADVANCED', 'BROWSER': '/home/ubuntu/.vscode-server/cli/servers/Stable-04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/server/bin/helpers/browser.sh', 'COPILOT_AGENT': '1', 'HOME': '/home/ubuntu', 'MOTD_SHOWN': 'pam', 'OLDPWD': '/home/ubuntu/ros2fox', 'CYCLONEDDS_URI': 'file:///etc/cyclonedds/config.xml', 'VSCODE_AGENT_ZSH_FIXUPS': '1', 'TERM_PROGRAM_VERSION': '1.139.1', 'VSCODE_IPC_HOOK_CLI': '/run/user/1000/vscode-ipc-45418bc3-3a81-419e-bd1d-98b572fd37d4.sock', 'ZSH': '/home/ubuntu/.zsh', 'need_compile': 'False', 'VSCODE_GIT_ASKPASS_MAIN': '/home/ubuntu/.vscode-server/cli/servers/Stable-04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/server/extensions/git/dist/askpass-main.js', 'ROS_PYTHON_VERSION': '3', 'LC_MONETARY': 'en_HK.UTF-8', 'VSCODE_GIT_ASKPASS_NODE': '/home/ubuntu/.vscode-server/cli/servers/Stable-04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/server/node', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'HW_WIFI_AP_SSID': 'HW-23042888', 'VSCODE_PREVENT_SHELL_HISTORY': '1', 'P9K_TTY': 'old', 'VSCODE_PYTHON_AUTOACTIVATE_GUARD': '1', 'COLORTERM': 'truecolor', '_colcon_cd_root': '/opt/ros/humble', 'NVM_DIR': '/home/ubuntu/.nvm', 'ROS_DISTRO': 'humble', 'COLCON_PREFIX_PATH': '/home/ubuntu/ros2fox/install', 'LOGNAME': 'ubuntu', 'VERSION': '|V1.0.1|App_ROS2_1.0|2025-06-19|', 'GTK_IM_MODULE': 'fcitx', '_': '/home/ubuntu/.local/bin/colcon', 'working_space': '/home/ubuntu', 'PULSE_SERVER': 'unix:/run/user/1000/pulse/native', '_P9K_SSH_TTY': '/dev/pts/1', 'XDG_SESSION_CLASS': 'user', 'USER_ZDOTDIR': '/home/ubuntu', 'ROS_VERSION': '2', 'XDG_SESSION_ID': '3', 'TERM': 'xterm-256color', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/cuda/bin:/home/ubuntu/.local/bin:/home/ubuntu/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/ubuntu/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/ubuntu/.vscode-server/cli/servers/Stable-04c0d99f4fb0d8afe6ce4f0c58e31e183ac3e4b1/server/bin/remote-cli:/opt/ros/humble/bin:/usr/local/cuda/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'PAPERSIZE': 'a4', 'LC_ADDRESS': 'en_HK.UTF-8', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'zh_CN.UTF-8', 'LC_TELEPHONE': 'en_HK.UTF-8', 'HISTSIZE': '10000', 'VSCODE_INJECTION': '1', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'XMODIFIERS': '@im=fcitx', 'TERM_PROGRAM': 'vscode', 'VSCODE_GIT_IPC_HANDLE': '/run/user/1000/vscode-git-156d340d6c.sock', 'ROSDISTRO_INDEX_URL': 'https://mirrors.tuna.tsinghua.edu.cn/rosdistro/index-v4.yaml', 'AMENT_PREFIX_PATH': '/home/ubuntu/ros2fox/install/fox_grape_harvest:/home/ubuntu/ros2fox/install/arm_controller:/home/ubuntu/ros2fox/install/fox_description_ros2:/home/ubuntu/ros2fox/install/fox_navigation_ros2:/home/ubuntu/ros2fox/install/fox_slam_ros2:/home/ubuntu/ros2fox/install/fox_webui:/home/ubuntu/ros2fox/install/gripper_control:/home/ubuntu/ros2fox/install/orbbec_camera:/home/ubuntu/ros2fox/install/orbbec_camera_msgs:/home/ubuntu/ros2fox/install/orbbec_description:/home/ubuntu/ros2fox/install/rei_robot_base:/home/ubuntu/ros2fox/install/ydlidar_ros2_driver:/home/ubuntu/ros2fox/install/arm_controller:/home/ubuntu/ros2fox/install/fox_description_ros2:/home/ubuntu/ros2fox/install/fox_navigation_ros2:/home/ubuntu/ros2fox/install/fox_slam_ros2:/home/ubuntu/ros2fox/install/fox_webui:/home/ubuntu/ros2fox/install/gripper_control:/home/ubuntu/ros2fox/install/orbbec_camera:/home/ubuntu/ros2fox/install/orbbec_camera_msgs:/home/ubuntu/ros2fox/install/orbbec_description:/home/ubuntu/ros2fox/install/rei_robot_base:/home/ubuntu/ros2fox/install/ydlidar_ros2_driver:/opt/ros/humble:/home/ubuntu/ros2fox/install/arm_controller:/opt/ros/humble:/home/ubuntu/ros2fox/install/arm_controller', 'CHASSIS_TYPE': 'None', 'ROS_DOMAIN_ID': '0', 'DEBIAN_FRONTEND': 'noninteractive', 'LC_NAME': 'en_HK.UTF-8', 'SHELL': '/bin/zsh', 'LC_MEASUREMENT': 'en_HK.UTF-8', 'LC_IDENTIFICATION': 'en_HK.UTF-8', 'P9K_SSH': '1', 'SAVEHIST': '10000', 'QT_IM_MODULE': 'fcitx', 'REI_ROBOT': 'fox_three', 'GIT_PAGER': 'cat', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'VSCODE_NONCE': '968c28bf-2e13-4bd0-a02b-b13a7a299fcf', 'LC_ALL': 'zh_CN.UTF-8', 'PWD': '/home/ubuntu/ros2fox/build/fox_webui', 'CUDA_HOME': '/usr/local/cuda', 'MIC_TYPE': 'None', 'GIT_MERGE_AUTOEDIT': 'no', 'SSH_CONNECTION': '10.136.202.231 49622 10.136.202.35 22', 'RCUTILS_COLORIZED_OUTPUT': '1', 'ASR_LANGUAGE': 'English', 'COPILOT_DEBUG_NONCE': '0324912e27699b646e54ce081e4ad132', 'ZDOTDIR': '/home/ubuntu', '_P9K_TTY': '/dev/pts/1', 'LC_NUMERIC': 'en_HK.UTF-8', 'PYTHONPATH': '/home/ubuntu/ros2fox/build/fox_webui/prefix_override:/home/ubuntu/ros2fox/install/fox_webui/lib/python3.10/site-packages:/home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages:/home/ubuntu/ros2fox/install/fox_webui/lib/python3.10/site-packages:/home/ubuntu/ros2fox/install/arm_controller/local/lib/python3.10/dist-packages:/home/ubuntu/ros2fox/install/orbbec_camera_msgs/local/lib/python3.10/dist-packages:/home/ubuntu/ros2fox/install/rei_robot_base/local/lib/python3.10/dist-packages:/home/ubuntu/ros2fox/install/fox_webui/lib/python3.10/site-packages:/home/ubuntu/ros2fox/install/arm_controller/local/lib/python3.10/dist-packages:/home/ubuntu/ros2fox/install/orbbec_camera_msgs/local/lib/python3.10/dist-packages:/home/ubuntu/ros2fox/install/rei_robot_base/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'LC_PAPER': 'en_HK.UTF-8', 'HISTFILE': '/home/ubuntu/.zsh/.zsh_history', 'COLCON': '1', 'AUDIODRIVER': 'alsa', 'CMAKE_PREFIX_PATH': '/home/ubuntu/ros2fox/install/rei_robot_base:/home/ubuntu/ros2fox/install/arm_controller:/home/ubuntu/ros2fox/install/fox_slam_ros2:/home/ubuntu/ros2fox/install/fox_navigation_ros2:/home/ubuntu/ros2fox/install/ydlidar_ros2_driver:/home/ubuntu/ros2fox/install/orbbec_description:/home/ubuntu/ros2fox/install/orbbec_camera:/home/ubuntu/ros2fox/install/orbbec_camera_msgs:/home/ubuntu/ros2fox/install/gripper_control:/home/ubuntu/ros2fox/install/fox_description_ros2'}, 'shell': False}
+[2.008077] (-) TimerEvent: {}
+[2.108502] (-) TimerEvent: {}
+[2.208922] (-) TimerEvent: {}
+[2.309386] (-) TimerEvent: {}
+[2.409837] (-) TimerEvent: {}
+[2.510260] (-) TimerEvent: {}
+[2.610691] (-) TimerEvent: {}
+[2.628069] (fox_webui) StdoutLine: {'line': b'running egg_info\n'}
+[2.672481] (fox_webui) StdoutLine: {'line': b'writing ../../build/fox_webui/fox_webui.egg-info/PKG-INFO\n'}
+[2.683297] (fox_webui) StdoutLine: {'line': b'writing dependency_links to ../../build/fox_webui/fox_webui.egg-info/dependency_links.txt\n'}
+[2.684003] (fox_webui) StdoutLine: {'line': b'writing entry points to ../../build/fox_webui/fox_webui.egg-info/entry_points.txt\n'}
+[2.684546] (fox_webui) StdoutLine: {'line': b'writing requirements to ../../build/fox_webui/fox_webui.egg-info/requires.txt\n'}
+[2.685024] (fox_webui) StdoutLine: {'line': b'writing top-level names to ../../build/fox_webui/fox_webui.egg-info/top_level.txt\n'}
+[2.710802] (-) TimerEvent: {}
+[2.777856] (fox_webui) StdoutLine: {'line': b"reading manifest file '../../build/fox_webui/fox_webui.egg-info/SOURCES.txt'\n"}
+[2.780725] (fox_webui) StdoutLine: {'line': b"writing manifest file '../../build/fox_webui/fox_webui.egg-info/SOURCES.txt'\n"}
+[2.782535] (fox_webui) StdoutLine: {'line': b'running build\n'}
+[2.783365] (fox_webui) StdoutLine: {'line': b'running build_py\n'}
+[2.783738] (fox_webui) StdoutLine: {'line': b'copying fox_webui/state.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui\n'}
+[2.784366] (fox_webui) StdoutLine: {'line': b'copying fox_webui/preview_detector.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui\n'}
+[2.784951] (fox_webui) StdoutLine: {'line': b'copying fox_webui/mapdata.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui\n'}
+[2.786130] (fox_webui) StdoutLine: {'line': b'copying fox_webui/peers.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui\n'}
+[2.786803] (fox_webui) StdoutLine: {'line': b'copying fox_webui/control.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui\n'}
+[2.787353] (fox_webui) StdoutLine: {'line': b'copying fox_webui/compensation.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui\n'}
+[2.787839] (fox_webui) StdoutLine: {'line': b'copying fox_webui/webapi.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui\n'}
+[2.788318] (fox_webui) StdoutLine: {'line': b'copying fox_webui/agent_node.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui\n'}
+[2.788788] (fox_webui) StdoutLine: {'line': b'copying fox_webui/process_manager.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui\n'}
+[2.789302] (fox_webui) StdoutLine: {'line': b'copying fox_webui/video.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui\n'}
+[2.789856] (fox_webui) StdoutLine: {'line': b'copying fox_webui/__init__.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui\n'}
+[2.790336] (fox_webui) StdoutLine: {'line': b'running install\n'}
+[2.799409] (fox_webui) StdoutLine: {'line': b'running install_lib\n'}
+[2.810940] (-) TimerEvent: {}
+[2.844584] (fox_webui) StdoutLine: {'line': b'copying /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui/webapi.py -> /home/ubuntu/ros2fox/install/fox_webui/lib/python3.10/site-packages/fox_webui\n'}
+[2.846396] (fox_webui) StdoutLine: {'line': b'byte-compiling /home/ubuntu/ros2fox/install/fox_webui/lib/python3.10/site-packages/fox_webui/webapi.py to webapi.cpython-310.pyc\n'}
+[2.853492] (fox_webui) StdoutLine: {'line': b'running install_data\n'}
+[2.853918] (fox_webui) StdoutLine: {'line': b'copying resource/fox_webui -> /home/ubuntu/ros2fox/install/fox_webui/share/ament_index/resource_index/packages\n'}
+[2.854890] (fox_webui) StdoutLine: {'line': b'copying package.xml -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui\n'}
+[2.855406] (fox_webui) StdoutLine: {'line': b'copying launch/webui.launch.py -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/launch\n'}
+[2.855714] (fox_webui) StdoutLine: {'line': b'copying config/modules.yaml -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/config\n'}
+[2.855978] (fox_webui) StdoutLine: {'line': b'copying config/webui.yaml -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/config\n'}
+[2.856218] (fox_webui) StdoutLine: {'line': b'copying web/style.css -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web\n'}
+[2.856369] (fox_webui) StdoutLine: {'line': b'copying web/index.html -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web\n'}
+[2.856508] (fox_webui) StdoutLine: {'line': b'copying web/lib/OrbitControls.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/lib\n'}
+[2.856734] (fox_webui) StdoutLine: {'line': b'copying web/lib/vue.esm-browser.prod.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/lib\n'}
+[2.857511] (fox_webui) StdoutLine: {'line': b'copying web/lib/three.module.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/lib\n'}
+[2.860510] (fox_webui) StdoutLine: {'line': b'copying web/build/COLCON_IGNORE -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/build\n'}
+[2.860957] (fox_webui) StdoutLine: {'line': b'copying web/build/.built_by -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/build\n'}
+[2.861363] (fox_webui) StdoutLine: {'line': b'copying web/install/_local_setup_util_sh.py -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install\n'}
+[2.861865] (fox_webui) StdoutLine: {'line': b'copying web/install/COLCON_IGNORE -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install\n'}
+[2.862074] (fox_webui) StdoutLine: {'line': b'copying web/install/local_setup.zsh -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install\n'}
+[2.862349] (fox_webui) StdoutLine: {'line': b'copying web/install/setup.zsh -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install\n'}
+[2.862630] (fox_webui) StdoutLine: {'line': b'copying web/install/setup.ps1 -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install\n'}
+[2.862872] (fox_webui) StdoutLine: {'line': b'copying web/install/local_setup.bash -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install\n'}
+[2.863117] (fox_webui) StdoutLine: {'line': b'copying web/install/local_setup.sh -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install\n'}
+[2.863438] (fox_webui) StdoutLine: {'line': b'copying web/install/.colcon_install_layout -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install\n'}
+[2.863741] (fox_webui) StdoutLine: {'line': b'copying web/install/_local_setup_util_ps1.py -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install\n'}
+[2.864085] (fox_webui) StdoutLine: {'line': b'copying web/install/setup.sh -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install\n'}
+[2.864393] (fox_webui) StdoutLine: {'line': b'copying web/install/setup.bash -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install\n'}
+[2.864702] (fox_webui) StdoutLine: {'line': b'copying web/install/local_setup.ps1 -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install\n'}
+[2.865049] (fox_webui) StdoutLine: {'line': b'copying web/log/COLCON_IGNORE -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/log\n'}
+[2.865407] (fox_webui) StdoutLine: {'line': b'copying web/log/build_2026-09-19_21-33-31/logger_all.log -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/log/build_2026-09-19_21-33-31\n'}
+[2.865784] (fox_webui) StdoutLine: {'line': b'copying web/log/build_2026-09-19_21-33-31/events.log -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/log/build_2026-09-19_21-33-31\n'}
+[2.866123] (fox_webui) StdoutLine: {'line': b'copying web/js/main.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js\n'}
+[2.866561] (fox_webui) StdoutLine: {'line': b'copying web/js/shared.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js\n'}
+[2.866806] (fox_webui) StdoutLine: {'line': b'copying web/js/components/StatusPanels.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components\n'}
+[2.867137] (fox_webui) StdoutLine: {'line': b'copying web/js/components/RobotPicker.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components\n'}
+[2.867446] (fox_webui) StdoutLine: {'line': b'copying web/js/components/VideoPanel.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components\n'}
+[2.867794] (fox_webui) StdoutLine: {'line': b'copying web/js/components/ArmPanel.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components\n'}
+[2.868115] (fox_webui) StdoutLine: {'line': b'copying web/js/components/MapView.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components\n'}
+[2.868446] (fox_webui) StdoutLine: {'line': b'copying web/js/components/NavPanel.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components\n'}
+[2.868753] (fox_webui) StdoutLine: {'line': b'copying web/js/components/LogPanel.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components\n'}
+[2.869054] (fox_webui) StdoutLine: {'line': b'copying web/js/components/TaskPanel.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components\n'}
+[2.869428] (fox_webui) StdoutLine: {'line': b'copying web/js/components/ModulePanel.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components\n'}
+[2.869750] (fox_webui) StdoutLine: {'line': b'copying web/js/components/ManualControl.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components\n'}
+[2.870052] (fox_webui) StdoutLine: {'line': b'running install_egg_info\n'}
+[2.911083] (-) TimerEvent: {}
+[2.917854] (fox_webui) StdoutLine: {'line': b"removing '/home/ubuntu/ros2fox/install/fox_webui/lib/python3.10/site-packages/fox_webui-0.1.0-py3.10.egg-info' (and everything under it)\n"}
+[2.918495] (fox_webui) StdoutLine: {'line': b'Copying ../../build/fox_webui/fox_webui.egg-info to /home/ubuntu/ros2fox/install/fox_webui/lib/python3.10/site-packages/fox_webui-0.1.0-py3.10.egg-info\n'}
+[2.920660] (fox_webui) StdoutLine: {'line': b'running install_scripts\n'}
+[3.011243] (-) TimerEvent: {}
+[3.111615] (-) TimerEvent: {}
+[3.211980] (-) TimerEvent: {}
+[3.297376] (fox_webui) StdoutLine: {'line': b'Installing fox_webui_agent script to /home/ubuntu/ros2fox/install/fox_webui/lib/fox_webui\n'}
+[3.298626] (fox_webui) StdoutLine: {'line': b"writing list of installed files to '/home/ubuntu/ros2fox/build/fox_webui/install.log'\n"}
+[3.312136] (-) TimerEvent: {}
+[3.389686] (fox_webui) CommandEnded: {'returncode': 0}
+[3.454472] (-) TimerEvent: {}
+[3.482246] (fox_webui) JobEnded: {'identifier': 'fox_webui', 'rc': 0}
+[3.484843] (-) EventReactorShutdown: {}

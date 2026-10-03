@@ -1,0 +1,45 @@
+Received signal: 6
+Stack trace (most recent call last) in thread 99425:
+#17   Object "[0xffffffffffffffff]", at 0xffffffffffffffff, in 
+#16   Object "/lib/aarch64-linux-gnu/libc.so.6", at 0xffff65175edb, in 
+#15   Object "/lib/aarch64-linux-gnu/libc.so.6", at 0xffff6510d5b7, in 
+#14   Object "/lib/aarch64-linux-gnu/libstdc++.so.6", at 0xffff653431fb, in 
+#13   Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff4e4541ab, in 
+#12   Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff4e4a74b7, in 
+#11   Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff4e4c08ab, in 
+#10   Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff4e4bf18b, in 
+#9    Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff4e331f13, in 
+#8    Object "/lib/aarch64-linux-gnu/libstdc++.so.6", at 0xffff65312e03, in __cxa_throw
+#7    Object "/lib/aarch64-linux-gnu/libstdc++.so.6", at 0xffff65312b1f, in std::terminate()
+#6    Object "/lib/aarch64-linux-gnu/libstdc++.so.6", at 0xffff65312abb, in 
+#5    Object "/lib/aarch64-linux-gnu/libstdc++.so.6", at 0xffff653162db, in __gnu_cxx::__verbose_terminate_handler()
+#4    Object "/lib/aarch64-linux-gnu/libc.so.6", at 0xffff650b712f, in abort
+#3    Object "/lib/aarch64-linux-gnu/libc.so.6", at 0xffff650ca67b, in raise
+#2    Object "/lib/aarch64-linux-gnu/libc.so.6", at 0xffff6510f1f0, in 
+#1    Object "linux-vdso.so.1", at 0xffff816d97bb, in 
+#0    Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/liborbbec_camera.so", at 0xffff55e5bc43, in signalHandler(int)
+Received signal: 11
+Received signal: 11
+Stack trace (most recent call last) in thread 99419:
+#11   Object "[0xffffffffffffffff]", at 0xffffffffffffffff, in 
+#10   Object "/lib/aarch64-linux-gnu/libc.so.6", at 0xffff65175edb, in 
+#9    Object "/lib/aarch64-linux-gnu/libc.so.6", at 0xffff6510d5b7, in 
+#8    Object "/lib/aarch64-linux-gnu/libstdc++.so.6", at 0xffff653431fb, in 
+#7    Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff4e454253, in 
+#6    Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff4e45ccb7, in 
+#5    Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff4e3cf64f, in 
+#4    Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff4e4ea4bf, in 
+#3    Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff4e4e6307, in 
+#2    Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/libOrbbecSDK.so.1.10", at 0xffff4e0de3dc, in 
+#1    Object "linux-vdso.so.1", at 0xffff816d97bb, in 
+#0    Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/liborbbec_camera.so", at 0xffff55e5bc43, in signalHandler(int)
+Stack trace (most recent call last) in thread 99418:
+#8    Object "[0xffffffffffffffff]", at 0xffffffffffffffff, in 
+#7    Object "/lib/aarch64-linux-gnu/libc.so.6", at 0xffff65175edb, in 
+#6    Object "/lib/aarch64-linux-gnu/libc.so.6", at 0xffff6510d5b7, in 
+#5    Object "/lib/aarch64-linux-gnu/libstdc++.so.6", at 0xffff653431fb, in 
+#4    Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/liborbbec_camera.so", at 0xffff55ec54ef, in orbbec_camera::OBCameraNode::onNewColorFrameCallback()
+#3    Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/liborbbec_camera.so", at 0xffff55ec4b8f, in orbbec_camera::OBCameraNode::decodeColorFrameToBuffer(std::shared_ptr<ob::Frame> const&, unsigned char*)
+#2    Object "/opt/ros/humble/lib/aarch64-linux-gnu/libimage_transport.so", at 0xffff58071540, in image_transport::Publisher::getNumSubscribers() const
+#1    Object "linux-vdso.so.1", at 0xffff816d97bb, in 
+#0    Object "/home/ubuntu/ros2fox/install/orbbec_camera/lib/liborbbec_camera.so", at 0xffff55e5bc43, in signalHandler(int)

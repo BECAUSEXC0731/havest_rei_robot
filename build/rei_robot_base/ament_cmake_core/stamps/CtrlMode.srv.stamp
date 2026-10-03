@@ -1,0 +1,4 @@
+int8 ctrl_mode #0: velocity, 1: motor speed
+bool use_acc # only valid when ctrl_mode is velocity
+---
+bool success

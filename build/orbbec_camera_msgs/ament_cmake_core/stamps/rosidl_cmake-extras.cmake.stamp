@@ -1,0 +1,4 @@
+# generated from rosidl_cmake/cmake/rosidl_cmake-extras.cmake.in
+
+set(orbbec_camera_msgs_IDL_FILES "msg/DeviceInfo.idl;msg/Extrinsics.idl;msg/Metadata.idl;msg/IMUInfo.idl;msg/RGBD.idl;srv/GetBool.idl;srv/GetDeviceInfo.idl;srv/GetCameraInfo.idl;srv/GetInt32.idl;srv/GetString.idl;srv/SetInt32.idl;srv/SetString.idl")
+set(orbbec_camera_msgs_INTERFACE_FILES "msg/DeviceInfo.msg;msg/Extrinsics.msg;msg/Metadata.msg;msg/IMUInfo.msg;msg/RGBD.msg;srv/GetBool.srv;srv/GetBool_Request.msg;srv/GetBool_Response.msg;srv/GetDeviceInfo.srv;srv/GetDeviceInfo_Request.msg;srv/GetDeviceInfo_Response.msg;srv/GetCameraInfo.srv;srv/GetCameraInfo_Request.msg;srv/GetCameraInfo_Response.msg;srv/GetInt32.srv;srv/GetInt32_Request.msg;srv/GetInt32_Response.msg;srv/GetString.srv;srv/GetString_Request.msg;srv/GetString_Response.msg;srv/SetInt32.srv;srv/SetInt32_Request.msg;srv/SetInt32_Response.msg;srv/SetString.srv;srv/SetString_Request.msg;srv/SetString_Response.msg")

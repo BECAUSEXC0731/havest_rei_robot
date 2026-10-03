@@ -1,0 +1,62 @@
+running egg_info
+writing ../../build/fox_webui/fox_webui.egg-info/PKG-INFO
+writing dependency_links to ../../build/fox_webui/fox_webui.egg-info/dependency_links.txt
+writing entry points to ../../build/fox_webui/fox_webui.egg-info/entry_points.txt
+writing requirements to ../../build/fox_webui/fox_webui.egg-info/requires.txt
+writing top-level names to ../../build/fox_webui/fox_webui.egg-info/top_level.txt
+reading manifest file '../../build/fox_webui/fox_webui.egg-info/SOURCES.txt'
+writing manifest file '../../build/fox_webui/fox_webui.egg-info/SOURCES.txt'
+running build
+running build_py
+copying fox_webui/state.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui
+copying fox_webui/preview_detector.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui
+copying fox_webui/mapdata.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui
+copying fox_webui/control.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui
+copying fox_webui/webapi.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui
+copying fox_webui/agent_node.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui
+copying fox_webui/video.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui
+copying fox_webui/__init__.py -> /home/ubuntu/ros2fox/build/fox_webui/build/lib/fox_webui
+running install
+running install_lib
+running install_data
+copying resource/fox_webui -> /home/ubuntu/ros2fox/install/fox_webui/share/ament_index/resource_index/packages
+copying package.xml -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui
+copying launch/webui.launch.py -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/launch
+copying config/webui.yaml -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/config
+copying web/style.css -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web
+copying web/index.html -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web
+copying web/lib/OrbitControls.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/lib
+copying web/lib/vue.esm-browser.prod.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/lib
+copying web/lib/three.module.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/lib
+copying web/build/COLCON_IGNORE -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/build
+copying web/build/.built_by -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/build
+copying web/install/_local_setup_util_sh.py -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install
+copying web/install/COLCON_IGNORE -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install
+copying web/install/local_setup.zsh -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install
+copying web/install/setup.zsh -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install
+copying web/install/setup.ps1 -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install
+copying web/install/local_setup.bash -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install
+copying web/install/local_setup.sh -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install
+copying web/install/.colcon_install_layout -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install
+copying web/install/_local_setup_util_ps1.py -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install
+copying web/install/setup.sh -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install
+copying web/install/setup.bash -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install
+copying web/install/local_setup.ps1 -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/install
+copying web/log/COLCON_IGNORE -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/log
+copying web/log/build_2026-09-19_21-33-31/logger_all.log -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/log/build_2026-09-19_21-33-31
+copying web/log/build_2026-09-19_21-33-31/events.log -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/log/build_2026-09-19_21-33-31
+copying web/js/main.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js
+copying web/js/shared.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js
+copying web/js/components/StatusPanels.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components
+copying web/js/components/VideoPanel.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components
+copying web/js/components/ArmPanel.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components
+copying web/js/components/MapView.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components
+copying web/js/components/NavPanel.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components
+copying web/js/components/LogPanel.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components
+copying web/js/components/ManualControl.js -> /home/ubuntu/ros2fox/install/fox_webui/share/fox_webui/web/js/components
+running install_egg_info
+removing '/home/ubuntu/ros2fox/install/fox_webui/lib/python3.10/site-packages/fox_webui-0.1.0-py3.10.egg-info' (and everything under it)
+Copying ../../build/fox_webui/fox_webui.egg-info to /home/ubuntu/ros2fox/install/fox_webui/lib/python3.10/site-packages/fox_webui-0.1.0-py3.10.egg-info
+running install_scripts
+Installing fox_webui_agent script to /home/ubuntu/ros2fox/install/fox_webui/lib/fox_webui
+writing list of installed files to '/home/ubuntu/ros2fox/build/fox_webui/install.log'

@@ -1,0 +1,6 @@
+{
+  "package_name": "uarm_controller",
+  "non_idl_tuples": [
+    "/home/ubuntu/ros2fox/src/uarm_controller:srv/MoveTo.srv"
+  ]
+}

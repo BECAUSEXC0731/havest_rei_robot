@@ -1,0 +1,37 @@
+<robot name="fox_base" xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:arg name="sim" default="0" />
+  <xacro:arg name="type" default="diff" />
+  <xacro:macro name="fox_choose_base" params="type sim">
+    <xacro:if value="${type == 'diff'}">
+      <link name="base_footprint" />
+      <joint name="footprint_joint" type="fixed">
+        <parent link="base_footprint" />
+        <child link="base_link" />
+        <origin xyz="0 0 0.038" rpy="0 0 0" />
+      </joint>
+      <xacro:include filename="$(find fox_description_ros2)/xacro/fox_diff.xacro" />
+      <xacro:fox_diff sim="${sim}" />
+    </xacro:if>
+    <xacro:if value="${type == 'mecanum'}">
+      <xacro:include filename="$(find fox_description_ros2)/xacro/fox_mecanum_omni.xacro" />
+      <xacro:fox_mecanum sim="${sim}" />
+      <link name="base_footprint" />
+      <joint name="footprint_joint" type="fixed">
+        <parent link="base_footprint" />
+        <child link="base_link" />
+        <origin xyz="0 0 0.0314" rpy="0 0 0" />
+      </joint>
+    </xacro:if>
+    <xacro:if value="${type == 'three'}">
+      <xacro:include filename="$(find fox_description_ros2)/xacro/fox_three_omni.xacro" />
+      <xacro:fox_three sim="${sim}" />
+      <link name="base_footprint" />
+      <joint name="footprint_joint" type="fixed">
+        <parent link="base_footprint" />
+        <child link="base_link" />
+        <origin xyz="0 0 0.0314" rpy="0 0 3.14159" />
+      </joint>
+    </xacro:if>
+  </xacro:macro>
+  <xacro:fox_choose_base type="$(arg type)" sim="$(arg sim)" />
+</robot>

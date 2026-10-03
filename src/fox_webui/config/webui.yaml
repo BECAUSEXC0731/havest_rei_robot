@@ -1,0 +1,81 @@
+# FOX WebUI 参数文件（ROS2 参数格式）
+# ════════════════════════════════════════════════════════════════════════
+#   格式很关键：必须是 "<节点名>:" → "ros__parameters:" → 参数。
+#    如果像普通配置那样在顶层直接写 `port: 8080`，`ros2 launch` 会在启动时报错
+#    （实测原文）：
+#        Couldn't parse params file: '.../webui.yaml'.
+#        Error: Cannot have a value before ros__parameters at line 7
+#    这里用 `/**` 表示"对所有节点名生效"，这样改节点名也不用改本文件。
+#
+# 用法：
+#   ros2 launch fox_webui webui.launch.py                       # 用本文件
+#   ros2 launch fox_webui webui.launch.py port:=8081            # 临时覆盖
+#   ros2 run fox_webui fox_webui_agent --ros-args -p port:=8081 # 直接跑节点
+#
+# 本文件只放 **Agent 自己声明过的参数**（见 agent_node.py 的 declare_parameter 列表）。
+# ════════════════════════════════════════════════════════════════════════
+
+/**:
+  ros__parameters:
+    # ── 服务 ──
+    port: 8080
+    host: "0.0.0.0"          # 0.0.0.0 = 局域网可访问（手机/平板直接开）
+    robot_name: "fox"        # 多机时用于区分
+    web_dir: ""              # 前端静态目录；留空 = 自动定位 install/share 或源码 web/
+
+    # ── 状态与健康 ──
+    log_buffer: 800          # /rosout 环形缓冲条数
+    online_timeout: 3.0      # 话题超过该秒数未收到 → 判定掉线
+
+    # ── 夹爪脉宽（项目实测定论: 2000=抓紧/闭合, 500=松开/张开）──
+    gripper_open_pulse: 500
+    gripper_close_pulse: 2000
+
+    # ── 坐标帧 ──
+    map_frame: "map"
+    base_frame: "base_footprint"
+    laser_frame: "front_lidar_link"
+
+    # ── 视频（按需 MJPEG）──
+    video_fps: 10.0
+    video_quality: 70
+
+    # ── 地图 ──
+    map_yaml: "/home/ubuntu/ros2fox/maps/test_map.yaml"
+
+    # ── 识别预览（按需 3Hz；detect_mode: yolo | sim）──
+    detect_mode: "yolo"
+    detect_hz: 3.0
+    detect_on_start: false   # 默认不开（吃 CPU/GPU），页面点"开启识别"才启动
+    harvest_config: "/home/ubuntu/ros2fox/src/fox_grape_harvest/config/harvest_config.yaml"
+
+    # ── 控制限速（手动驾驶）──
+    max_vx: 0.3
+    max_vy: 0.3
+    max_vth: 0.5
+    # 速度看门狗超时（秒）：前端 10Hz 续期，超过这么久没续到就自动归零（"死亡开关"）。
+    # ⚠️ 2026-10-02 实测：设成 0.3 会让车"一动一停"，看起来像"按住好几秒才有反应"。
+    #   端到端固有延迟 = 前端续期 100ms + 后端发布 100ms + HTTP 往返（最差实测 ~300ms）；
+    #   实测"按住→车真的动"= 294 ms，正好卡在 0.3 上。现放宽到 0.8（仍能保证断网即停）。
+    cmd_timeout: 0.8
+    nav_home_x: 0.0
+    nav_home_y: 0.0
+
+    # ── 模块启停（白名单）──
+    enable_modules: true
+    modules_yaml: "/home/ubuntu/ros2fox/src/fox_webui/config/modules.yaml"
+
+    # ── 多机 · 模式 C（对称 HTTP 聚合）──
+    #   每台机都跑本 Agent，并在这里列出**另外几台**的地址；各机之间用 HTTP 互拉状态
+    #   例（三台机）：
+    #     bot1 这台写： peers: "bot2=http://192.168.1.12:8080,bot3=http://192.168.1.13:8080"
+    #     bot2 这台写： peers: "bot1=http://192.168.1.11:8080,bot3=http://192.168.1.13:8080"
+    #     bot3 这台写： peers: "bot1=http://192.168.1.11:8080,bot2=http://192.168.1.12:8080"
+    #
+    #   ⚠️ 必须同时给每台机设 `export ROS_LOCALHOST_ONLY=1`（本机 DDS 不出网卡），
+    #      否则三台机的 /odom、/scan 会在同一 DDS 域里互相串台、页面数值乱跳。
+    peers: "差速轮=http://asir.local:8080,麦克纳姆轮=http://hhh.local:8080"
+  
+
+    peer_hz: 5.0          # 邻居状态拉取频率（Hz）；不需要 10Hz，5Hz 足够
+    peer_timeout: 1.0     # 单次 HTTP 超时（秒）—— 必须有，否则邻居卡住会拖住采集线程

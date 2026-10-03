@@ -1,0 +1,11 @@
+{
+  "package_name": "rei_robot_base",
+  "non_idl_tuples": [
+    "/home/ubuntu/ros2fox/src/rei_robot_base:msg/CarData.msg",
+    "/home/ubuntu/ros2fox/src/rei_robot_base:msg/MotorCmd.msg",
+    "/home/ubuntu/ros2fox/src/rei_robot_base:msg/BumperCliff.msg",
+    "/home/ubuntu/ros2fox/src/rei_robot_base:srv/SetIO.srv",
+    "/home/ubuntu/ros2fox/src/rei_robot_base:srv/Int8.srv",
+    "/home/ubuntu/ros2fox/src/rei_robot_base:srv/CtrlMode.srv"
+  ]
+}

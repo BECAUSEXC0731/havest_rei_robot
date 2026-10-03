@@ -1,0 +1,17 @@
+/**:
+  ros__parameters:
+    robot: "fox"
+    port: "/dev/fox"
+    baudrate: 115200
+    kinematics_mode: 2
+    wheel_radius: 0.03725
+    wheel_separation_y: 0.355
+    motors_index: [0, 1]
+    motors_signs: [-1.0, -1.0]
+    odom_frame: "odom"
+    base_frame: "base_footprint"
+    max_vel_x: 0.8
+    max_vel_y: 0.8
+    max_vel_th: 1.5
+    publish_odom: true
+    publish_odom_tf: true

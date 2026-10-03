@@ -1,0 +1,2 @@
+orbbec_camera::OBCameraNodeDriver;lib/liborbbec_camera.so
+orbbec_camera::FrameLatencyNode;lib/libframe_latency.so

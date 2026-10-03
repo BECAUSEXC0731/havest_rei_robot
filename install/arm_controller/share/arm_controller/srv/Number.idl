@@ -1,0 +1,20 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from arm_controller/srv/Number.srv
+// generated code does not contain a copyright notice
+
+#include "arm_controller/msg/Control.idl"
+
+module arm_controller {
+  module srv {
+    struct Number_Request {
+      int8 data;
+    };
+    struct Number_Response {
+      boolean success;
+
+      sequence<int8> number;
+
+      sequence<arm_controller::msg::Control> pose;
+    };
+  };
+};

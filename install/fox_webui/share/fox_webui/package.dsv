@@ -1,0 +1,6 @@
+source;share/fox_webui/hook/pythonpath.ps1
+source;share/fox_webui/hook/pythonpath.dsv
+source;share/fox_webui/hook/pythonpath.sh
+source;share/fox_webui/hook/ament_prefix_path.ps1
+source;share/fox_webui/hook/ament_prefix_path.dsv
+source;share/fox_webui/hook/ament_prefix_path.sh

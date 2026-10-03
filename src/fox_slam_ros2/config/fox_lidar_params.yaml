@@ -1,0 +1,25 @@
+/**:
+  ros__parameters:
+    port: /dev/ydlidar
+    frame_id: front_lidar_link
+    ignore_array: "60, 120"
+    baudrate: 115200
+    lidar_type: 1
+    device_type: 0
+    sample_rate: 3
+    abnormal_check_count: 4
+    fixed_resolution: true
+    reversion: false
+    inverted: true
+    auto_reconnect: true
+    isSingleChannel: true
+    intensity: true
+    intensity_bit: 10
+    support_motor_dtr: true
+    angle_min: -180.0
+    angle_max: 180.0
+    range_min: 0.1
+    range_max: 6.0
+    frequency: 10.0
+    invalid_range_is_inf: false
+    debug: false

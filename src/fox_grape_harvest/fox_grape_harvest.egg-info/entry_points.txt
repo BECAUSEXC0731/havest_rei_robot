@@ -1,0 +1,2 @@
+[console_scripts]
+grape_harvest_node = fox_grape_harvest.harvest_node:main

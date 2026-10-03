@@ -1,0 +1,109 @@
+[0.000000] (-) TimerEvent: {}
+[0.000283] (-) JobUnselected: {'identifier': 'arm_controller'}
+[0.000780] (-) JobUnselected: {'identifier': 'fox_description_ros2'}
+[0.000836] (-) JobUnselected: {'identifier': 'fox_navigation_ros2'}
+[0.000902] (-) JobUnselected: {'identifier': 'fox_slam_ros2'}
+[0.000947] (-) JobUnselected: {'identifier': 'fox_webui'}
+[0.001509] (-) JobUnselected: {'identifier': 'gripper_control'}
+[0.001867] (-) JobUnselected: {'identifier': 'jie_ware'}
+[0.002262] (-) JobUnselected: {'identifier': 'orbbec_camera'}
+[0.002371] (-) JobUnselected: {'identifier': 'orbbec_camera_msgs'}
+[0.002482] (-) JobUnselected: {'identifier': 'orbbec_description'}
+[0.002553] (-) JobUnselected: {'identifier': 'rei_robot_base'}
+[0.002619] (-) JobUnselected: {'identifier': 'ydlidar_ros2_driver'}
+[0.002750] (fox_grape_harvest) JobQueued: {'identifier': 'fox_grape_harvest', 'dependencies': OrderedDict([('arm_controller', '/home/ubuntu/ros2fox/install/arm_controller')])}
+[0.002871] (fox_grape_harvest) JobStarted: {'identifier': 'fox_grape_harvest'}
+[0.098904] (-) TimerEvent: {}
+[0.199274] (-) TimerEvent: {}
+[0.299667] (-) TimerEvent: {}
+[0.404748] (-) TimerEvent: {}
+[0.520392] (-) TimerEvent: {}
+[0.621046] (-) TimerEvent: {}
+[0.721607] (-) TimerEvent: {}
+[0.822307] (-) TimerEvent: {}
+[0.922656] (-) TimerEvent: {}
+[1.023047] (-) TimerEvent: {}
+[1.123402] (-) TimerEvent: {}
+[1.224160] (-) TimerEvent: {}
+[1.324580] (-) TimerEvent: {}
+[1.425033] (-) TimerEvent: {}
+[1.525637] (-) TimerEvent: {}
+[1.626034] (-) TimerEvent: {}
+[1.726879] (-) TimerEvent: {}
+[1.828211] (-) TimerEvent: {}
+[1.928638] (-) TimerEvent: {}
+[2.029023] (-) TimerEvent: {}
+[2.129426] (-) TimerEvent: {}
+[2.229821] (-) TimerEvent: {}
+[2.330298] (-) TimerEvent: {}
+[2.430747] (-) TimerEvent: {}
+[2.531141] (-) TimerEvent: {}
+[2.631538] (-) TimerEvent: {}
+[2.731982] (-) TimerEvent: {}
+[2.832369] (-) TimerEvent: {}
+[2.932755] (-) TimerEvent: {}
+[3.033140] (-) TimerEvent: {}
+[3.133512] (-) TimerEvent: {}
+[3.233911] (-) TimerEvent: {}
+[3.334313] (-) TimerEvent: {}
+[3.434754] (-) TimerEvent: {}
+[3.526699] (fox_grape_harvest) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/fox_grape_harvest', 'build', '--build-base', '/home/ubuntu/ros2fox/build/fox_grape_harvest/build', 'install', '--record', '/home/ubuntu/ros2fox/build/fox_grape_harvest/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/ubuntu/ros2fox/src/fox_grape_harvest', 'env': {'VSCODE_CWD': '/home/ubuntu', 'VSCODE_ESM_ENTRYPOINT': 'vs/workbench/api/node/extensionHostProcess', 'USER': 'ubuntu', 'SSH_CLIENT': '10.248.143.51 55404 22', 'LC_TIME': 'en_HK.UTF-8', 'VSCODE_NLS_CONFIG': '{"userLocale":"zh-cn","osLocale":"zh-cn","resolvedLanguage":"zh-cn","defaultMessagesFile":"/home/ubuntu/.vscode-server/cli/servers/Stable-8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8/server/out/nls.messages.json","languagePack":{"translationsConfigFile":"/home/ubuntu/.vscode-server/data/clp/75539731208fa508a5b042c8fe051beb.zh-cn/tcf.json","messagesFile":"/home/ubuntu/.vscode-server/data/clp/75539731208fa508a5b042c8fe051beb.zh-cn/8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8/nls.messages.json","corruptMarkerFile":"/home/ubuntu/.vscode-server/data/clp/75539731208fa508a5b042c8fe051beb.zh-cn/corrupted.info"},"locale":"zh-cn","availableLanguages":{"*":"zh-cn"},"_languagePackId":"75539731208fa508a5b042c8fe051beb.zh-cn","_languagePackSupport":true,"_translationsConfigFile":"/home/ubuntu/.vscode-server/data/clp/75539731208fa508a5b042c8fe051beb.zh-cn/tcf.json","_cacheRoot":"/home/ubuntu/.vscode-server/data/clp/75539731208fa508a5b042c8fe051beb.zh-cn","_resolvedLanguagePackCoreLocation":"/home/ubuntu/.vscode-server/data/clp/75539731208fa508a5b042c8fe051beb.zh-cn/8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8","_corruptedFile":"/home/ubuntu/.vscode-server/data/clp/75539731208fa508a5b042c8fe051beb.zh-cn/corrupted.info"}', 'CAMERA_TYPE': 'GEMINI', 'VSCODE_HANDLES_UNCAUGHT_ERRORS': 'true', 'XDG_SESSION_TYPE': 'tty', 'MACHINE_TYPE': 'JETARM_ADVANCED', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/ubuntu/ros2fox/install/arm_controller/lib:/opt/ros/humble/lib:/usr/local/cuda/lib64', 'BROWSER': '/home/ubuntu/.vscode-server/cli/servers/Stable-8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8/server/bin/helpers/browser.sh', 'MOTD_SHOWN': 'pam', 'HOME': '/home/ubuntu', 'CYCLONEDDS_URI': 'file:///etc/cyclonedds/config.xml', 'OLDPWD': '/home/ubuntu', 'VSCODE_RECONNECTION_GRACE_TIME': '10800000', 'VSCODE_IPC_HOOK_CLI': '/run/user/1000/vscode-ipc-fe587cce-8cce-4ea5-91eb-0a53092f35f1.sock', 'JETSON_L4T': '36.3.0', 'ZSH': '/home/ubuntu/.zsh', 'need_compile': 'False', 'JETSON_MODEL': 'NVIDIA Jetson Orin Nano Developer Kit', 'LC_MONETARY': 'en_HK.UTF-8', 'COPILOT_OTEL_FILE_EXPORTER_PATH': '/dev/null', 'ELECTRON_NO_ASAR': '1', 'HW_WIFI_AP_SSID': 'HW-23042888', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'NVM_DIR': '/home/ubuntu/.nvm', '_colcon_cd_root': '/opt/ros/humble', 'APPLICATION_INSIGHTS_NO_STATSBEAT': 'true', 'GTK_IM_MODULE': 'fcitx', 'LOGNAME': 'ubuntu', 'VERSION': '|V1.0.1|App_ROS2_1.0|2025-06-19|', 'JETSON_MODULE': 'NVIDIA Jetson Orin Nano (Developer kit)', 'JETSON_SERIAL_NUMBER': '1422323042888', 'VSCODE_HANDLES_SIGPIPE': 'true', '_P9K_SSH_TTY': '', 'working_space': '/home/ubuntu', 'PULSE_SERVER': 'unix:/run/user/1000/pulse/native', '_': '/home/ubuntu/.local/bin/colcon', 'XDG_SESSION_CLASS': 'user', 'XDG_SESSION_ID': '3', 'VSCODE_CLI_REQUIRE_TOKEN': '62223c11-c71c-44fd-9571-4eb5191f32d0', 'PATH': '/home/ubuntu/.local/bin:/home/ubuntu/.vscode-server/cli/servers/Stable-8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8/server/bin/remote-cli:/opt/ros/humble/bin:/usr/local/cuda/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'VSCODE_AGENT_FOLDER': '/home/ubuntu/.vscode-server', 'PAPERSIZE': 'a4', 'LC_ADDRESS': 'en_HK.UTF-8', 'XDG_RUNTIME_DIR': '/run/user/1000', 'HISTSIZE': '10000', 'LANG': 'zh_CN.UTF-8', 'LC_TELEPHONE': 'en_HK.UTF-8', 'XMODIFIERS': '@im=fcitx', 'LS_COLORS': '', 'JETSON_SOC': 'tegra234', 'CHASSIS_TYPE': 'None', 'ROSDISTRO_INDEX_URL': 'https://mirrors.tuna.tsinghua.edu.cn/rosdistro/index-v4.yaml', 'ROS_DOMAIN_ID': '0', 'AMENT_PREFIX_PATH': '/opt/ros/humble:/home/ubuntu/ros2fox/install/arm_controller', 'SHELL': '/bin/zsh', 'LC_NAME': 'en_HK.UTF-8', 'MXC_BIN_DIR': '/home/ubuntu/.vscode-server/cli/servers/Stable-8a7abeba6e03ea3af87bfbce9a1b7e48fed567b8/server/node_modules/@microsoft/mxc-sdk/bin', 'ELECTRON_RUN_AS_NODE': '1', 'LC_MEASUREMENT': 'en_HK.UTF-8', 'LC_IDENTIFICATION': 'en_HK.UTF-8', 'P9K_SSH': '1', 'SAVEHIST': '10000', 'REI_ROBOT': 'fox_three', 'QT_IM_MODULE': 'fcitx', 'JETSON_CUDA_ARCH_BIN': '8.7', 'PWD': '/home/ubuntu/ros2fox/build/fox_grape_harvest', 'MIC_TYPE': 'None', 'LC_ALL': 'zh_CN.UTF-8', 'CUDA_HOME': '/usr/local/cuda', 'SSH_CONNECTION': '10.248.143.51 55404 10.248.143.36 22', 'RCUTILS_COLORIZED_OUTPUT': '1', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'ASR_LANGUAGE': 'English', 'PYTHONPATH': '/home/ubuntu/ros2fox/build/fox_grape_harvest/prefix_override:/home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages:/home/ubuntu/ros2fox/install/arm_controller/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'LC_NUMERIC': 'en_HK.UTF-8', 'LC_PAPER': 'en_HK.UTF-8', 'HISTFILE': '/home/ubuntu/.zsh/.zsh_history', 'COLCON': '1', 'AUDIODRIVER': 'alsa', 'COPILOT_CLI_ENABLED_FEATURE_FLAGS': 'SHELL_SPAWN_BACKEND', 'JETSON_JETPACK': '6.0', 'JETSON_P_NUMBER': 'p3767-0005', 'CMAKE_PREFIX_PATH': '/home/ubuntu/ros2fox/install/arm_controller'}, 'shell': False}
+[3.534892] (-) TimerEvent: {}
+[3.635255] (-) TimerEvent: {}
+[3.735625] (-) TimerEvent: {}
+[3.835977] (-) TimerEvent: {}
+[3.936352] (-) TimerEvent: {}
+[4.036812] (-) TimerEvent: {}
+[4.418915] (-) TimerEvent: {}
+[4.432105] (fox_grape_harvest) StdoutLine: {'line': b'running egg_info\n'}
+[4.478995] (fox_grape_harvest) StdoutLine: {'line': b'writing ../../build/fox_grape_harvest/fox_grape_harvest.egg-info/PKG-INFO\n'}
+[4.948659] (-) TimerEvent: {}
+[4.949929] (fox_grape_harvest) StdoutLine: {'line': b'writing dependency_links to ../../build/fox_grape_harvest/fox_grape_harvest.egg-info/dependency_links.txt\n'}
+[4.950532] (fox_grape_harvest) StdoutLine: {'line': b'writing entry points to ../../build/fox_grape_harvest/fox_grape_harvest.egg-info/entry_points.txt\n'}
+[4.951370] (fox_grape_harvest) StdoutLine: {'line': b'writing requirements to ../../build/fox_grape_harvest/fox_grape_harvest.egg-info/requires.txt\n'}
+[4.951600] (fox_grape_harvest) StdoutLine: {'line': b'writing top-level names to ../../build/fox_grape_harvest/fox_grape_harvest.egg-info/top_level.txt\n'}
+[5.048835] (-) TimerEvent: {}
+[5.093663] (fox_grape_harvest) StdoutLine: {'line': b"reading manifest file '../../build/fox_grape_harvest/fox_grape_harvest.egg-info/SOURCES.txt'\n"}
+[5.107000] (fox_grape_harvest) StdoutLine: {'line': b"writing manifest file '../../build/fox_grape_harvest/fox_grape_harvest.egg-info/SOURCES.txt'\n"}
+[5.107887] (fox_grape_harvest) StdoutLine: {'line': b'running build\n'}
+[5.108101] (fox_grape_harvest) StdoutLine: {'line': b'running build_py\n'}
+[5.108260] (fox_grape_harvest) StdoutLine: {'line': b'copying fox_grape_harvest/chassis_interface.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest\n'}
+[5.108544] (fox_grape_harvest) StdoutLine: {'line': b'copying fox_grape_harvest/wait_utils.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest\n'}
+[5.109007] (fox_grape_harvest) StdoutLine: {'line': b'copying fox_grape_harvest/harvest_node.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest\n'}
+[5.110968] (fox_grape_harvest) StdoutLine: {'line': b'copying fox_grape_harvest/arm_interface.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest\n'}
+[5.111506] (fox_grape_harvest) StdoutLine: {'line': b'copying fox_grape_harvest/depth_utils.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest\n'}
+[5.112026] (fox_grape_harvest) StdoutLine: {'line': b'copying fox_grape_harvest/yolo_detector.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest\n'}
+[5.112730] (fox_grape_harvest) StdoutLine: {'line': b'copying fox_grape_harvest/grape_grasp_test.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest\n'}
+[5.113346] (fox_grape_harvest) StdoutLine: {'line': b'copying fox_grape_harvest/__init__.py -> /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest\n'}
+[5.114452] (fox_grape_harvest) StdoutLine: {'line': b'running install\n'}
+[5.139490] (fox_grape_harvest) StdoutLine: {'line': b'running install_lib\n'}
+[5.149545] (-) TimerEvent: {}
+[5.205534] (fox_grape_harvest) StdoutLine: {'line': b'copying /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest/harvest_node.py -> /home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages/fox_grape_harvest\n'}
+[5.206246] (fox_grape_harvest) StdoutLine: {'line': b'copying /home/ubuntu/ros2fox/build/fox_grape_harvest/build/lib/fox_grape_harvest/arm_interface.py -> /home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages/fox_grape_harvest\n'}
+[5.207696] (fox_grape_harvest) StdoutLine: {'line': b'byte-compiling /home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages/fox_grape_harvest/harvest_node.py to harvest_node.cpython-310.pyc\n'}
+[5.222152] (fox_grape_harvest) StdoutLine: {'line': b'byte-compiling /home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages/fox_grape_harvest/arm_interface.py to arm_interface.cpython-310.pyc\n'}
+[5.225366] (fox_grape_harvest) StdoutLine: {'line': b'running install_data\n'}
+[5.226331] (fox_grape_harvest) StdoutLine: {'line': b'copying resource/fox_grape_harvest -> /home/ubuntu/ros2fox/install/fox_grape_harvest/share/ament_index/resource_index/packages\n'}
+[5.227049] (fox_grape_harvest) StdoutLine: {'line': b'copying package.xml -> /home/ubuntu/ros2fox/install/fox_grape_harvest/share/fox_grape_harvest\n'}
+[5.227257] (fox_grape_harvest) StdoutLine: {'line': b'copying launch/full_system.launch.py -> /home/ubuntu/ros2fox/install/fox_grape_harvest/share/fox_grape_harvest/launch\n'}
+[5.227443] (fox_grape_harvest) StdoutLine: {'line': b'copying launch/grape_harvest.launch.py -> /home/ubuntu/ros2fox/install/fox_grape_harvest/share/fox_grape_harvest/launch\n'}
+[5.227650] (fox_grape_harvest) StdoutLine: {'line': b'copying config/harvest_config.yaml -> /home/ubuntu/ros2fox/install/fox_grape_harvest/share/fox_grape_harvest/config\n'}
+[5.227852] (fox_grape_harvest) StdoutLine: {'line': b'copying scripts/test_detection.py -> /home/ubuntu/ros2fox/install/fox_grape_harvest/share/fox_grape_harvest/scripts\n'}
+[5.230643] (fox_grape_harvest) StdoutLine: {'line': b'copying scripts/grape_grasp_test.py -> /home/ubuntu/ros2fox/install/fox_grape_harvest/share/fox_grape_harvest/scripts\n'}
+[5.239597] (fox_grape_harvest) StdoutLine: {'line': b'running install_egg_info\n'}
+[5.249664] (-) TimerEvent: {}
+[5.307587] (fox_grape_harvest) StdoutLine: {'line': b"removing '/home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages/fox_grape_harvest-0.1.0-py3.10.egg-info' (and everything under it)\n"}
+[5.308373] (fox_grape_harvest) StdoutLine: {'line': b'Copying ../../build/fox_grape_harvest/fox_grape_harvest.egg-info to /home/ubuntu/ros2fox/install/fox_grape_harvest/lib/python3.10/site-packages/fox_grape_harvest-0.1.0-py3.10.egg-info\n'}
+[5.319603] (fox_grape_harvest) StdoutLine: {'line': b'running install_scripts\n'}
+[5.350026] (-) TimerEvent: {}
+[5.450416] (-) TimerEvent: {}
+[5.551326] (-) TimerEvent: {}
+[5.651724] (-) TimerEvent: {}
+[5.752114] (-) TimerEvent: {}
+[5.914647] (fox_grape_harvest) StdoutLine: {'line': b'Installing grape_grasp_test.py script to /home/ubuntu/ros2fox/install/fox_grape_harvest/lib/fox_grape_harvest\n'}
+[5.914923] (-) TimerEvent: {}
+[5.914971] (fox_grape_harvest) StdoutLine: {'line': b'Installing grape_harvest_node script to /home/ubuntu/ros2fox/install/fox_grape_harvest/lib/fox_grape_harvest\n'}
+[5.915122] (fox_grape_harvest) StdoutLine: {'line': b"writing list of installed files to '/home/ubuntu/ros2fox/build/fox_grape_harvest/install.log'\n"}
+[5.915265] (fox_grape_harvest) CommandEnded: {'returncode': 0}
+[5.920980] (fox_grape_harvest) JobEnded: {'identifier': 'fox_grape_harvest', 'rc': 0}
+[5.922876] (-) EventReactorShutdown: {}

@@ -1,0 +1,41 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from rei_robot_base/msg/CarData.msg
+// generated code does not contain a copyright notice
+
+#include "std_msgs/msg/Header.idl"
+
+module rei_robot_base {
+  module msg {
+    typedef int8 int8__4[4];
+    typedef int8 int8__7[7];
+    struct CarData {
+      std_msgs::msg::Header header;
+
+      sequence<double> motor_speed;
+
+      sequence<int8> crash;
+
+      sequence<int8> cliff;
+
+      sequence<float> ultrasound;
+
+      int8 smoke;
+
+      float power_voltage;
+
+      boolean is_charge;
+
+      float tempareture;
+
+      float relative_humidity;
+
+      int8__4 input_io;
+
+      int8__7 output_io;
+
+      boolean relay_status;
+
+      boolean connect_status;
+    };
+  };
+};

@@ -1,0 +1,7 @@
+uint8 number
+uint8 mode
+arm_controller/Control pose
+---
+arm_controller/Control pose
+bool success
+string message

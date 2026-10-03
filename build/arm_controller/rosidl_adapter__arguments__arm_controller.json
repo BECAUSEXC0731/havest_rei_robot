@@ -1,0 +1,10 @@
+{
+  "package_name": "arm_controller",
+  "non_idl_tuples": [
+    "/home/ubuntu/ros2fox/src/arm_controller:msg/Control.msg",
+    "/home/ubuntu/ros2fox/src/arm_controller:srv/Number.srv",
+    "/home/ubuntu/ros2fox/src/arm_controller:srv/PickPlace.srv",
+    "/home/ubuntu/ros2fox/src/arm_controller:srv/Move.srv",
+    "/home/ubuntu/ros2fox/src/arm_controller:srv/RelativePos.srv"
+  ]
+}

@@ -1,0 +1,4 @@
+
+bool success
+int8[] number
+arm_controller/Control[] pose

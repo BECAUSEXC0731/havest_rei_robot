@@ -1,0 +1,3 @@
+[console_scripts]
+grape_grasp_test.py = fox_grape_harvest.grape_grasp_test:main
+grape_harvest_node = fox_grape_harvest.harvest_node:main

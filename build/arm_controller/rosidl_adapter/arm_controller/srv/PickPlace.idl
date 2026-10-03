@@ -1,0 +1,24 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from arm_controller/srv/PickPlace.srv
+// generated code does not contain a copyright notice
+
+#include "arm_controller/msg/Control.idl"
+
+module arm_controller {
+  module srv {
+    struct PickPlace_Request {
+      uint8 number;
+
+      uint8 mode;
+
+      arm_controller::msg::Control pose;
+    };
+    struct PickPlace_Response {
+      arm_controller::msg::Control pose;
+
+      boolean success;
+
+      string message;
+    };
+  };
+};

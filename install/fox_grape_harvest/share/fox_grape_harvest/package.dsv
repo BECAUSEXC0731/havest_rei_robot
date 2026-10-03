@@ -1,0 +1,6 @@
+source;share/fox_grape_harvest/hook/pythonpath.ps1
+source;share/fox_grape_harvest/hook/pythonpath.dsv
+source;share/fox_grape_harvest/hook/pythonpath.sh
+source;share/fox_grape_harvest/hook/ament_prefix_path.ps1
+source;share/fox_grape_harvest/hook/ament_prefix_path.dsv
+source;share/fox_grape_harvest/hook/ament_prefix_path.sh

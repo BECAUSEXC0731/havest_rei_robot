@@ -1,0 +1,2 @@
+[console_scripts]
+fox_webui_agent = fox_webui.agent_node:main

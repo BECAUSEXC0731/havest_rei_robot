@@ -1,0 +1,21 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from uarm_controller/srv/MoveTo.srv
+// generated code does not contain a copyright notice
+
+
+module uarm_controller {
+  module srv {
+    struct MoveTo_Request {
+      double x;
+
+      double y;
+
+      double z;
+    };
+    struct MoveTo_Response {
+      boolean success;
+
+      string message;
+    };
+  };
+};

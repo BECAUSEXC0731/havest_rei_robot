@@ -1,0 +1,173 @@
+# FOX 葡萄采摘综合配置
+# ────────────────────────────────────
+
+# YOLO 模型路径（.pt 或 .onnx）
+yolo_model_path: "/home/ubuntu/ros2fox/models/grape.pt"
+# 检测置信度阈值
+yolo_confidence: 0.5
+# 检测的类别名称（YOLO 类别名）
+target_class: "grape"
+
+# 相机话题
+camera_rgb_topic: "/camera/color/image_raw"
+camera_depth_topic: "/camera/depth/image_raw"
+camera_info_topic: "/camera/color/camera_info"
+
+# 到达航点后、开始检测前等待图像稳定的时间（秒）
+image_settle_sec: 4.0
+
+# ── 到点检测：多帧采样（2026-09-28）──
+# 到点（以及每次扫描旋转）后连续取几帧、逐帧 YOLO；只要其中某帧出现
+# 可抓(GRASP) / 临界(MARGINAL) 目标就直接抓；全都没有才去做 ±角度扫描。
+detect_frames: 5                 # 取几帧（≥1）；2026-09-28 3 → 5，多取几帧抗单帧闪烁/误检
+detect_frame_interval_sec: 0.3   # 帧间隔（等新帧到，怕重复拿到同一帧）
+
+# 手眼标定结果路径
+hand_eye_calib_path: "/home/ubuntu/ros2fox/calib_result/hand_eye_result.json"
+
+# 手动深度对齐(彩色↔IR 外参)：由 calibrate_color_ir.py 生成
+d2c_extrinsic_path: "/home/ubuntu/ros2fox/calib_result/color_ir_extrinsic.json"
+ir_camera_info_path: "/home/ubuntu/ros2fox/calib_data/ir/ir_camera_info.yaml"
+
+# 机械臂参数
+arm:
+  # 工作空间范围（mm，相对机械臂基座坐标系 "robot"）
+  # 缓解葡萄坐标在边界附近抖动导致的"一时可达一时不可达"
+  workspace_x_min: 30
+  workspace_x_max: 335
+  workspace_y_min: -190
+  workspace_y_max: 190
+  workspace_z_min: 20
+  workspace_z_max: 220
+  # 安全抓取中心（机械臂抓取葡萄的理想位置）
+  preferred_x: 200
+  preferred_y: 0
+  preferred_z: 130
+  # 抓取过渡点（机械臂参考点，mm）：抓取前先到这里，再去抓取点。
+  transition_x: 120
+  transition_y: 0
+  transition_z: 60
+  # ── 抓取可行性判定（可抓性）──
+  # 判定 = 坐标是否落在工作空间盒内(向内收缩 margin)。精度由深度/手眼决定，
+  # 这里只调"判定容度"，不参与 3D 坐标计算 → 放宽判定不影响定位精度。
+  #   margin_xy_mm / margin_z_mm : 向内安全裕度(越大越保守)
+  #   marginal_mm     : 盒边界外 ≤ 该值的"临界可达"容差带(第三态)；0=关闭
+  #   margin_scale_per_m : 自适应裕度，每远 1m 额外增加的 mm；0=关闭
+  #   radius_min_mm / radius_max_mm : 水平半径 hypot(x,y) 约束(剔除盒角落假可达)；0=关闭
+  grasp_check:
+    # 2026-09-14 再放宽：判定盒=真实边界(不内缩) + 容差带 70mm
+    margin_xy_mm: 0
+    margin_z_mm: 0
+    # 盒外 70mm 内算"临界可达"(MARGINAL) → 进一步提升可抓容度
+    # （只放宽判定容差带，3D 坐标精度不变；临界是否直接抓见下方 grasp_marginal）
+    marginal_mm: 70
+    margin_scale_per_m: 0
+    radius_min_mm: 0
+    radius_max_mm: 0
+    # 临界可达(MARGINAL，盒边界外 ≤ marginal_mm)是否也当“可抓”直接尝试（2026-09-24）
+    #   true  = 临界 → 直接抓（容度最高；若真的够不到会“抓取失败”后继续下一个目标）
+    #   false = 临界 → 先旋转微调，再重新判定
+    grasp_marginal: true
+  # 夹爪 TCP 工具偏移（mm）：定义在【机械臂局部坐标系】，脚本按朝向自动旋转：
+  #   tool_offset_x: 沿机械臂指向目标的径向方向
+  #   tool_offset_y: 侧向（垂直径向）
+  #   tool_offset_z: 垂直方向（不随朝向变化）
+  # 所以葡萄在左/右/前不同位姿都能正确补偿（避免“往前调好往后又偏”）。
+  # 测量：把葡萄放机械臂正前方(y≈0)，手动让夹爪夹住，读参考点 R 和视觉坐标 P，
+  #      tool_offset = R - P（此时 θ≈0，局部系=机器人系）。
+  tool_offset_x: -80
+  tool_offset_y: -60
+  tool_offset_z: -30
+  # 夹爪夹紧后的等待时间（秒）
+  grip_delay: 1.0
+  # 夹取完成后回到的安全点（机械臂参考点，mm）
+  home_x: 0
+  home_y: -120
+  home_z: 60
+  # ── 兜底抓取（2026-09-28）──
+  # ±角度扫描后依然不可达时，把目标【夹到工作空间内最近的可达点】再抓一次
+  # （逐轴夹到 workspace_* 边界，再向内收 fallback_inward_mm，避免正好压在边界上）
+  #   true  = 兜底抓（“够不到也把手伸到最接近的位置试试”，可能夹空/夹偏）
+  #   false = 不可达就直接跳过
+  fallback_nearest: true
+  fallback_inward_mm: 10.0
+
+# 底盘旋转（2026-09-28: 改为「±角度扫描」）
+# 真不可达时：先顺时针转 rotate_scan_deg → 等稳定 + 多帧检测；还不行再逆时针
+# 转到另一侧（+rotate_scan_deg）再找一次。旋转改不了距离 r=hypot(x,y)，只能改变
+# 葡萄在机器人系的方位角（变为 ψ−Δθ），所以能救“距离够、方位偏出盒外”的目标。
+chassis:
+  rotate_max_vel: 1.5             # 最大角速度 (rad/s)，大了会转过头来回震
+  rotate_min_vel: 0.1             # 最小角速度 (rad/s)，太小克服不了静摩擦（原地不动）
+  rotate_kp: 1.5                  # 角度 P 增益：误差大时转得快，近了降速
+  rotate_tolerance_deg: 3.0       # 到位容差 (°)，越小越准但可能来回磨
+  rotate_timeout: 15.0            # 单次旋转超时 (s)，超时急停并返回失败
+  # ★扫描角度（°）：先顺时针 -该值，再逆时针 +2倍该值（停在原点位的另一侧）
+  rotate_scan_deg: 25.0
+  # 每次扫描旋转后的等待（秒）：等车停稳 + 相机曝光/深度稳定，再取帧
+  rotate_settle_sec: 3.0
+  # 到航点一轮下来【一颗都没抓到】时，是否做 ±角度扫描重试
+  rotate_retry_enable: true
+
+# 导航参数
+navigation:
+  # 是否使用 Nav2 action 导航（设为 false 则直接发 cmd_vel）
+  use_nav2: true
+  # 导航超时（秒）
+  nav_timeout: 120.0
+
+# 航点列表（导航目标点，map 坐标系）
+# 每个航点: 到达后执行葡萄检测 + 采摘（每加一个航点就多一趟“导航→检测→抓取”）
+#
+# ── 怎么加一个航点？直接在 waypoints: 下面按下面格式追加一项，顺序 = 遍历顺序 ──
+#   - position: { x: 1.20, y: -0.35 }      # 必填，map 坐标系，单位【米】
+#     orientation: { z: 0.0, w: 1.0 }      # 选填，只取 yaw；不写 = 朝 +x 方向（yaw=0）
+#     description: "第二排起点"             # 选填，仅用于日志/网页显示
+#
+# 朝向怎么写：yaw 角（度）→ z = sin(yaw/2)，w = cos(yaw/2)。例如：
+#   正前(+x) 0°   → { z: 0.000, w: 1.000 }
+#   左转90°       → { z: 0.707, w: 0.707 }
+#   右转90°       → { z: -0.707, w: 0.707 }
+#   掉头180°      → { z: 1.000, w: 0.000 }
+#
+# ⚠️ 航点必须落在【已建图的已知区域】内（nav2 允许规划的区域），否则全局规划
+#    直接失败。中心缩进必须和其他项一致（2 空格 + "- "）。
+
+waypoints:
+
+  
+  - position: { x: -0.700, y: 0.250 }
+    orientation: { z: 0.999, w: -0.033 }
+    description: "葡萄采摘点1" 
+
+  - position: { x: -1.280, y: 0.303 }
+    orientation: { z: 0.999,w: -0.027  }
+    description: "葡萄采摘点2"
+
+  - position: { x: -1.730, y: 0.303 }
+    orientation: { z: 0.999,w: -0.053  }
+    description: "葡萄采摘点3"
+
+  - position: { x: -2.474, y: 0.369 }
+    orientation: { z: 0.999,w: -0.033  }
+    description: "葡萄采摘点4"
+
+  - position: { x: -2.780, y: 0.303 }
+    orientation: { z: 0.999,w: -0.027  }
+    description: "葡萄采摘点5"
+
+
+  
+
+
+
+
+# 车上篮子位置（机械臂坐标系 mm）—— 每抓到一颗葡萄后，机械臂移动到此处松开
+# 篮子放在底盘上（随车走），无需导航；位置相对机械臂基座，请按实际摆放调整
+car_basket:
+  position: { x: 0.0, y: -180.0, z: 30.0 }
+  # 移动到篮子位置上方/下方的抬升高度（mm）
+  lift_height: 30.0
+
+# 采摘完成后是否返回地图原点
+return_to_origin: true

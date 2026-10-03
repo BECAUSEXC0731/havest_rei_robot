@@ -1,0 +1,23 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from rei_robot_base/srv/SetIO.srv
+// generated code does not contain a copyright notice
+
+
+module rei_robot_base {
+  module srv {
+    struct SetIO_Request {
+      boolean all_off;
+
+      boolean all_on;
+
+      sequence<int8> io;
+
+      boolean state;
+    };
+    struct SetIO_Response {
+      boolean success;
+
+      string message;
+    };
+  };
+};

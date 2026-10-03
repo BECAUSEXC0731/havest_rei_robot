@@ -1,0 +1,21 @@
+// generated from rosidl_adapter/resource/srv.idl.em
+// with input from arm_controller/srv/RelativePos.srv
+// generated code does not contain a copyright notice
+
+
+module arm_controller {
+  module srv {
+    struct RelativePos_Request {
+      float dx;
+
+      float dy;
+
+      float dz;
+    };
+    struct RelativePos_Response {
+      boolean success;
+
+      string message;
+    };
+  };
+};

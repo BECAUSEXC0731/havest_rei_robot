@@ -1,0 +1,5 @@
+/home/ubuntu/ros2fox/build/arm_controller/rosidl_adapter/arm_controller:msg/Control.idl
+/home/ubuntu/ros2fox/build/arm_controller/rosidl_adapter/arm_controller:srv/Number.idl
+/home/ubuntu/ros2fox/build/arm_controller/rosidl_adapter/arm_controller:srv/PickPlace.idl
+/home/ubuntu/ros2fox/build/arm_controller/rosidl_adapter/arm_controller:srv/Move.idl
+/home/ubuntu/ros2fox/build/arm_controller/rosidl_adapter/arm_controller:srv/RelativePos.idl

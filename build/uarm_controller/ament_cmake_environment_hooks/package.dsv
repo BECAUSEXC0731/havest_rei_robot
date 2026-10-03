@@ -1,0 +1,4 @@
+source;share/uarm_controller/local_setup.bash
+source;share/uarm_controller/local_setup.dsv
+source;share/uarm_controller/local_setup.sh
+source;share/uarm_controller/local_setup.zsh
